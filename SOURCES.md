@@ -25,5 +25,7 @@ Each folder keeps the original licence file. To update a folder, fetch the same 
 | Folder | Source | Note |
 |---|---|---|
 | `rules/animation/`, `rules/product-photo/topics/` | Our private working repo (Meta), commit `7a0ec25` | Copied unchanged; verified identical |
+| `rules/animation/reels/`, `rules/product-photo/reels/` | Meta `animation/reel-01…08.md`, `animation/index.md` (→ `all-lessons.md`), `product-shoot/mind/reels/REEL-001…009.md` | Creator usernames removed; style / main lesson / filed-in lines added at the top; "Takeaway for Nvidia" headings renamed "Takeaway". Reel links kept as sources |
+| `rules/animation/motion-recipes.md`, both reels `README.md` files | Written 2026-10-30 from the reel studies | New |
 
 Not copied on purpose: GSAP (own licence, use `npm install gsap`), and everything in [`repo-catalog/`](repo-catalog/README.md).

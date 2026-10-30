@@ -16,6 +16,8 @@ Copied unchanged from our private working repo on 2026-10-30. Some notes still m
 | [`m3-layout-notes.md`](animation/m3-layout-notes.md) | Google Material 3 breakpoints, panes, grids, margins | Phone vs tablet vs desktop layouts | breakpoints, responsive, grid, columns, Material 3 |
 | [`space-concepts-notes.md`](animation/space-concepts-notes.md) | Whitespace theory: macro, meso, micro space; grouping; breathing room | Making a frame or page feel calm and premium | whitespace, negative space, grouping, proximity, breathing room |
 | [`research-index.md`](animation/research-index.md) | Which websites were read, what was taken, which note holds it | Finding the source of a rule | sources, research, references |
+| [`motion-recipes.md`](animation/motion-recipes.md) | **Code recipes** (GSAP + SVG) for 17 effects: punch word, progress ring, tilted cards, 3D flip, staggered pills, letter build, motion blur, orbit dots, colour wash, panel wipe, push-in, voice sync, counters | Building any animated effect | GSAP code, recipe, effect, stagger, ease, motion blur, wipe, counter, voice sync |
+| [`reels/`](animation/reels/README.md) | 8 Instagram motion reels studied frame by frame, each with style + main lesson; `all-lessons.md` sums them up into rules | Getting motion ideas that keep viewers watching | Instagram, reels, motion design, premium, pacing, kinetic typography |
 
 ## `product-photo/topics/` — product photos and ad images
 | File | What it is | Keywords |
@@ -29,5 +31,7 @@ Copied unchanged from our private working repo on 2026-10-30. Some notes still m
 | [`ad-format-hooks.md`](product-photo/topics/ad-format-hooks.md) | Reel/ad formats, tonalities, attention triggers, 9 carousel types | ad format, hook, carousel, CTA, attention |
 | [`prompt-craft.md`](product-photo/topics/prompt-craft.md) | Image prompt in 5 slots: product + setting + lighting + style + technical | AI image prompt, prompt formula |
 | [`process.md`](product-photo/topics/process.md) | Diagnose the one weakness, fix it boldly; self-score before showing (below 7 = redo) | process, QC, critique, self-score |
+
+The lessons above came from 9 Instagram reels; each one, with its lesson and source link, is in [`product-photo/reels/`](product-photo/reels/README.md).
 
 Matching ready skill: [`../third-party/anthropic-skills/skills/canvas-design/`](../third-party/anthropic-skills/skills/canvas-design/) for the layout and fonts of a static ad.

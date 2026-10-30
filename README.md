@@ -15,8 +15,8 @@ It holds free, licence-checked design assets (fonts, icons, colours, patterns, a
 | Task | Read / use first | Then |
 |---|---|---|
 | **Website / landing page** | `third-party/impeccable` + `third-party/taste-skill` (design rules) | fonts, `tailwindcss/theme.css` (colours + spacing), icons, `magicui` (patterns/effects), brand DESIGN.md for a style direction |
-| **Video / animated infographic** | `rules/animation/` (margin-rules, motion-principles, gsap-notes, svg2-notes), then GSAP (`npm install gsap`) or `third-party/anime`, `chart.js` for charts | `third-party/lemo-opuscar-blueprint` (blueprint-drawing look), icons, `roughjs` for a hand-drawn look, fonts, colours; catalog: lemo-opuscar for 66 more video styles |
-| **Product photo / ad image** | `rules/product-photo/topics/` (composition, colour, lighting, typography, prompt-craft, process), `anthropic-skills/canvas-design` (layout + fonts) | `theme-factory` (colour + font pairs), fonts, brand DESIGN.md for premium styles |
+| **Video / animated infographic** | `rules/animation/` (margin-rules, motion-principles, **motion-recipes**, `reels/` lessons, gsap-notes, svg2-notes), then GSAP (`npm install gsap`) or `third-party/anime`, `chart.js` for charts | `third-party/lemo-opuscar-blueprint` (blueprint-drawing look), icons, `roughjs` for a hand-drawn look, fonts, colours; catalog: lemo-opuscar for 66 more video styles |
+| **Product photo / ad image** | `rules/product-photo/topics/` (composition, colour, lighting, typography, prompt-craft, process) + `reels/` lessons, `anthropic-skills/canvas-design` (layout + fonts) | `theme-factory` (colour + font pairs), fonts, brand DESIGN.md for premium styles |
 | **Infographic / poster (static)** | `canvas-design`, icons, `tailwindcss/theme.css` colours | `roughjs`, `chart.js` |
 | **Pick a colour theme** | `theme-factory/themes/` (10 ready themes) · `tailwindcss/theme.css` | `awesome-design-md` brand palettes · catalog: daisyui |
 | **Pick fonts** | `anthropic-skills/skills/canvas-design/canvas-fonts/` (29 families) | `theme-factory` font pairings |
@@ -83,7 +83,7 @@ Note: `sheet.js` still contains the original demo's text ("The Cloud Catcher", "
 ---
 
 ## Other folders
-- [`rules/`](rules/README.md): our own rules: video margins, motion, GSAP/SVG notes, and the product-photo topics (composition, colour, lighting, typography, prompts, QC).
+- [`rules/`](rules/README.md): our own rules: video margins, motion, GSAP/SVG notes, **motion code recipes**, 8 studied motion reels, and the product-photo topics (composition, colour, lighting, typography, prompts, QC) with their 9 source reels.
 - [`repo-catalog/`](repo-catalog/README.md): 20 more repos (lemo-opuscar video styles, three.js, zdog, pixijs, konva, daisyUI, shadcn/ui, preline, hyperui…) with use cases, keywords, useful paths and how to fetch only that part.
 - [`websites/`](websites/README.md): 11 reference websites (Refero Styles, ThreeUI, GSAP docs, motion rules, SVG spec…).
 - [`SOURCES.md`](SOURCES.md): where every copied file came from (repo, commit or version, path, licence).
