@@ -91,6 +91,13 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 | components, blocks, themes not in this repo (shadcn/ui, daisyUI, Preline, HyperUI…) | [`catalog/repos.md`](catalog/repos.md) |
 | inspiration websites | [`catalog/websites.md`](catalog/websites.md) |
 
+## Working style and tool choice
+| Keywords | Path |
+|---|---|
+| ★ how the AI should work, boss mode, CTO, strategy, reuse before build, verify, honest status | [`guides/boss-mode.md`](guides/boss-mode.md) |
+| ★ which tool / library to pick, scores out of 10, UI kits, graphics libraries, avoid list | [`catalog/tools-index.md`](catalog/tools-index.md) |
+| security tools: leaked keys, code scan, dependency CVEs, website scan (Gitleaks, Semgrep, OSV-Scanner, ZAP) | [`catalog/tools-index.md`](catalog/tools-index.md) → Security tools |
+
 ## Licences and sources
 | Keywords | Path |
 |---|---|

@@ -12,6 +12,7 @@ material/
 ├─ INDEX.md         keyword → exact path finder
 ├─ SOURCES.md       where every copied file came from + its licence
 ├─ guides/          ★ OUR RULES — read first, they win over everything else
+│  ├─ boss-mode.md     how the AI should work (owner mindset, reuse first, verify)
 │  ├─ layout/          margins, spacing, whitespace, breakpoints
 │  ├─ animation/       motion rules, code recipes, GSAP/SVG notes, reel lessons
 │  └─ product-photo/   composition, colour, lighting, type, prompts, QC, reel lessons
@@ -28,7 +29,7 @@ material/
 │  ├─ anime/  animate-css/  chartjs/  roughjs/
 │  ├─ magicui/         79 effects: patterns, glow, shine, number ticker, text effects
 │  └─ blueprint-engine/  blueprint-drawing video style + its fonts
-└─ catalog/         links only: 20 more repos, 11 websites (not copied)
+└─ catalog/         links only: our scored tools index (~90 tools), 20 more repos, 11 websites
 ```
 
 ## Task router
@@ -41,6 +42,7 @@ material/
 | **Pick colours / a theme** | [`guides/product-photo/topics/colour.md`](guides/product-photo/topics/colour.md) | [`skills/anthropic/theme-factory`](skills/anthropic/theme-factory/) (10 themes) | [`assets/colors/tailwind/theme.css`](assets/colors/tailwind/theme.css) · brand palettes in [`skills/brand-styles`](skills/brand-styles/) |
 | **Pick fonts** | [`guides/product-photo/topics/typography.md`](guides/product-photo/topics/typography.md) | `theme-factory` font pairs | [`assets/fonts/`](assets/fonts/README.md) (33 families) |
 | **Margins, spacing, layout** | [`guides/layout/`](guides/layout/) (margin-rules, space-concepts, m3-layout) | `impeccable` → layout | spacing scale in [`theme.css`](assets/colors/tailwind/theme.css) |
+| **Pick a tool / library (UI kit, charts, 3D, security)** | [`guides/boss-mode.md`](guides/boss-mode.md) (reuse before build) | — | [`catalog/tools-index.md`](catalog/tools-index.md) (scored /10, avoid list) |
 | **Premium look, glow, badges, patterns** | [`guides/animation/reels/`](guides/animation/reels/README.md) (why reels feel premium) | `impeccable` → bolder / polish / delight | [`libraries/magicui`](libraries/magicui/) |
 
 If nothing here fits, use [`catalog/`](catalog/README.md). Every folder has a README with details and keywords.

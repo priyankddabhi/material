@@ -26,6 +26,8 @@ Each folder keeps its original licence file. To update a folder, fetch the same 
 |---|---|---|
 | `guides/layout/`, `guides/animation/*.md` (except `motion-recipes.md`), `guides/product-photo/topics/` | Our private working repo (Meta), commit `7a0ec25` | Copied unchanged; verified identical |
 | `guides/animation/reels/`, `guides/product-photo/reels/` | Meta `animation/reel-01…08.md`, `animation/index.md` (→ `reels/all-lessons.md`), `product-shoot/mind/reels/REEL-001…009.md` | Creator usernames removed; style / main lesson / filed-in lines added; "Takeaway for Nvidia" headings renamed "Takeaway". Reel links kept as sources |
+| `guides/boss-mode.md` | Our local notes folder (`become_boss.md`) | Copied unchanged |
+| `catalog/tools-index.md` | Our local notes folder (`AI-RESOURCE-INDEX.md`, verified 2026-10-05) | Original text unchanged; an "Updates 2026-10-30" note added at the top |
 | `guides/animation/motion-recipes.md`, all `README.md`, `AGENTS.md`, `INDEX.md` | Written 2026-10-30 | New |
 
 Not copied on purpose: GSAP (own licence, use `npm install gsap`), and everything in [`catalog/`](catalog/README.md).

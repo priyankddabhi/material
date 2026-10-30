@@ -2,6 +2,8 @@
 
 You are using **material**, a design library for making websites, videos / animated infographics, and product photos / ads.
 
+**Working style:** follow [`guides/boss-mode.md`](guides/boss-mode.md) — think like the owner: goal → best strategy → reuse / automate / delegate → decide → execute → verify. Reuse before rebuilding, recommend one best option, and never claim work, tests or sources that did not happen.
+
 ## How to work with this repo
 1. **Find the task** in the router in [`README.md`](README.md), or search [`INDEX.md`](INDEX.md) by keyword (font, glow, progress ring, margin, palette…).
 2. **Read our rules first** in [`guides/`](guides/README.md). They come from real projects. When a skill or library says something different, **our rules win**.
