@@ -5,21 +5,22 @@ It holds free, licence-checked design assets (fonts, icons, colours, patterns, a
 
 ## AI agent: start here
 1. Find your task in **Task router** below and open only the listed items.
-2. Use files from [`third-party/`](third-party/) directly. They are complete copies, verified against their source.
-3. If nothing fits, check [`repo-catalog/`](repo-catalog/README.md) (repos not copied here, with what to fetch) and [`websites/`](websites/README.md).
-4. Before copying anything into a project, check its licence in the item's folder and in [`SOURCES.md`](SOURCES.md).
-5. Make original work. The brand DESIGN.md files are style references; never imitate a real brand's identity.
+2. Read our own rules in [`rules/`](rules/README.md) first. When they disagree with a third-party skill, our rules win.
+3. Use files from [`third-party/`](third-party/) directly. They are complete copies, verified against their source.
+4. If nothing fits, check [`repo-catalog/`](repo-catalog/README.md) (repos not copied here, with what to fetch) and [`websites/`](websites/README.md).
+5. Before copying anything into a project, check its licence in the item's folder and in [`SOURCES.md`](SOURCES.md).
+6. Make original work. The brand DESIGN.md files are style references; never imitate a real brand's identity.
 
 ## Task router
 | Task | Read / use first | Then |
 |---|---|---|
 | **Website / landing page** | `third-party/impeccable` + `third-party/taste-skill` (design rules) | fonts, `tailwindcss/theme.css` (colours + spacing), icons, `magicui` (patterns/effects), brand DESIGN.md for a style direction |
-| **Video / animated infographic** | `third-party/anime` or GSAP (`npm install gsap`), `chart.js` for charts | icons, `roughjs` for a hand-drawn look, fonts, colours |
-| **Product photo / ad image** | `anthropic-skills/canvas-design` (layout + fonts), `theme-factory` (colour + font pairs) | fonts, brand DESIGN.md for premium styles |
+| **Video / animated infographic** | `rules/animation/` (margin-rules, motion-principles, gsap-notes, svg2-notes), then GSAP (`npm install gsap`) or `third-party/anime`, `chart.js` for charts | `third-party/lemo-opuscar-blueprint` (blueprint-drawing look), icons, `roughjs` for a hand-drawn look, fonts, colours; catalog: lemo-opuscar for 66 more video styles |
+| **Product photo / ad image** | `rules/product-photo/topics/` (composition, colour, lighting, typography, prompt-craft, process), `anthropic-skills/canvas-design` (layout + fonts) | `theme-factory` (colour + font pairs), fonts, brand DESIGN.md for premium styles |
 | **Infographic / poster (static)** | `canvas-design`, icons, `tailwindcss/theme.css` colours | `roughjs`, `chart.js` |
 | **Pick a colour theme** | `theme-factory/themes/` (10 ready themes) · `tailwindcss/theme.css` | `awesome-design-md` brand palettes · catalog: daisyui |
 | **Pick fonts** | `anthropic-skills/skills/canvas-design/canvas-fonts/` (29 families) | `theme-factory` font pairings |
-| **Margins, spacing, layout** | `impeccable` (layout reference) · `tailwindcss/theme.css` spacing scale | brand DESIGN.md spacing sections |
+| **Margins, spacing, layout** | `rules/animation/margin-rules.md` · `rules/animation/space-concepts-notes.md` · `tailwindcss/theme.css` spacing scale | `impeccable` layout reference · `rules/animation/m3-layout-notes.md` (breakpoints) · brand DESIGN.md spacing sections |
 | **Rich / premium look, badges, glow** | `magicui` (shine border, border beam, neon card, sparkles) | `impeccable` → bolder / polish / delight |
 | **Background pattern** | `magicui` (dot, grid, hexagon, striped, retro grid, noise, flickering grid) | catalog: flowbite gradients |
 
@@ -72,9 +73,17 @@ Keywords: serif, sans-serif, mono, display, handwriting, luxury serif, tech mono
 
 **GSAP** (main animation tool for videos) is not copied: its licence is GSAP's own. Install it with `npm install gsap`.
 
+### Video style engine
+| Folder | What it is | Keywords | Licence |
+|---|---|---|---|
+| [`lemo-opuscar-blueprint/`](third-party/lemo-opuscar-blueprint/) | The "Blueprint" video style from lemo-opuscar: drawing engine (`engine/draw.js`: projection, lines that draw themselves by length), WebGL cyanotype paper (`engine/paper.js`: stains, shadows, stamp), sheet furniture (`engine/sheet.js`: border, title block, parts list, notes, rain, hand shadow), its 5 fonts with OFL licences, and `STYLE.md` (the full style rules) | blueprint, technical drawing, patent drawing, line drawing animation, cyanotype, engineering, explainer video | MIT (code) · OFL (fonts) |
+
+Note: `sheet.js` still contains the original demo's text ("The Cloud Catcher", "C. Wrenfield", "LemoLab × Claude Opus 5.5"). Replace it with your own title-block text before using it in a video.
+
 ---
 
 ## Other folders
-- [`repo-catalog/`](repo-catalog/README.md): 19 more repos (three.js, zdog, pixijs, konva, daisyUI, shadcn/ui, preline, hyperui…) with use cases, keywords, useful paths and how to fetch only that part.
+- [`rules/`](rules/README.md): our own rules: video margins, motion, GSAP/SVG notes, and the product-photo topics (composition, colour, lighting, typography, prompts, QC).
+- [`repo-catalog/`](repo-catalog/README.md): 20 more repos (lemo-opuscar video styles, three.js, zdog, pixijs, konva, daisyUI, shadcn/ui, preline, hyperui…) with use cases, keywords, useful paths and how to fetch only that part.
 - [`websites/`](websites/README.md): 11 reference websites (Refero Styles, ThreeUI, GSAP docs, motion rules, SVG spec…).
 - [`SOURCES.md`](SOURCES.md): where every copied file came from (repo, commit or version, path, licence).

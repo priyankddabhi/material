@@ -18,4 +18,12 @@ Each folder keeps the original licence file. To update a folder, fetch the same 
 | `third-party/roughjs/` | npm `roughjs` (source https://github.com/rough-stuff/rough) | 4.6.6 | `bundled/rough.js`, `rough.esm.js`, `rough.cjs.js`, `LICENSE` | MIT |
 | `third-party/chart.js/` | npm `chart.js` (source https://github.com/chartjs/Chart.js) | 4.6.1 | `dist/chart.umd.js`, `dist/chart.umd.min.js`, `LICENSE.md` | MIT |
 
+| `third-party/lemo-opuscar-blueprint/` | https://github.com/lemomo-ai/lemo-opuscar | `f171360` | `LICENSE`; `styles/blueprint/STYLE.md`; `styles/blueprint/demo/CREDITS`; `styles/blueprint/demo/draw.js`, `paper.js`, `sheet.js` → `engine/`; `styles/blueprint/demo/fonts/fonts.css`, `OFL.txt` → `engine/fonts/` | MIT (Copyright 2026 LemoLab) |
+| `third-party/lemo-opuscar-blueprint/engine/fonts/*.ttf` | https://github.com/google/fonts (as named in the style's CREDITS) | main, 2026-10-30 | `ofl/architectsdaughter/`, `ofl/b612/`, `ofl/b612mono/`, `ofl/allura/` (font + `OFL.txt`, saved as `OFL-<family>.txt`) | SIL OFL 1.1 |
+
+## Our own work
+| Folder | Source | Note |
+|---|---|---|
+| `rules/animation/`, `rules/product-photo/topics/` | Our private working repo (Meta), commit `7a0ec25` | Copied unchanged; verified identical |
+
 Not copied on purpose: GSAP (own licence, use `npm install gsap`), and everything in [`repo-catalog/`](repo-catalog/README.md).

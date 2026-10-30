@@ -1,6 +1,6 @@
 # Repo catalog — useful repos that are NOT copied here
 
-These repos are useful but were not copied, because they are too big, React-only, licence-limited, or only needed now and then.
+These 20 repos are useful but were not copied, because they are too big, React-only, licence-limited, or only needed now and then.
 Each entry tells an AI agent what the repo is good for, which part is worth reading, and how to fetch only that part.
 
 **How an AI agent should use this file**
@@ -15,6 +15,7 @@ Facts checked on 2026-10-30 (stars, size, last update, licence, folder paths).
 ## Quick pick
 | Need | Best repo here |
 |---|---|
+| **A complete video style made in code (66 styles)** | **lemo-opuscar** |
 | 3D product viewer / 3D hero / 3D video scene | three.js |
 | Round, flat pseudo-3D shapes (isometric "Mix 3" look) | zdog |
 | Rich 2D effects, particles, filters | pixijs |
@@ -180,6 +181,17 @@ Facts checked on 2026-10-30 (stars, size, last update, licence, folder paths).
 - **Size:** 2.3 MB · **Stars:** 1.4k · **Updated:** 2025-12
 - **Use it for:** inspiration for dashboards, heroes and app layouts (6 experiments).
 - **Keywords:** layouts, dashboard, hero, app UI, shadcn, inspiration only
+
+## 20. lemomo-ai/lemo-opuscar — 66 video styles made in code
+- **Link:** https://github.com/lemomo-ai/lemo-opuscar · gallery https://lemomo-ai.github.io/lemo-opuscar/
+- **Licence:** MIT (Copyright 2026 LemoLab); each style lists its font, voice and music credits in `demo/CREDITS` · **Stars:** 9.6k · **Updated:** 2026-10-29
+- **Use it for:** making an explainer or ad video in a complete, ready style: each style has a style prompt (`STYLE.md`), a demo film with all its code, and its credits. Tuned for Claude; other models may reproduce it less well.
+- **Keywords:** video styles, explainer video, motion graphics in code, blueprint, swiss motion, iso infographic, dataviz, dark keynote, glass product, whiteboard, papercut, risograph, newsreel, transit map, kinetic, film
+- **Styles (66):** archive-lighttable, art-deco, ascii-crt, backrooms, blueprint, brick-toy, briefing-board, caption-news, cel-anime-80s, chalkboard, circuit-board, city-symphony, countdown, crayon-book, dark-keynote, data-physical, dataviz, desktop-flythrough, engraving, game-show, glass-product, halftone-dossier, hd-2d, hologram-hud, impasto, ink-wash, iso-infographic, isometric-picture-book, kino-montage, lidar-survey, living-screencast, lowpoly-island, memphis-diorama, microgame, microscope, midcentury-toon, news-package, newsreel, one-line, paper-lantern, paper-popup, papercut-red, pictogram-motion, pixel-rpg, printed-long-take, risograph, rubber-hose, satellite-briefing, scifi-toon, shadow-puppet, silent-film, silkscreen-poster, spy-titles, stained-glass, swiss-motion, teardown, telestrator, tilt-shift, transit-map, ukiyoe, urban-sketch, visual-investigation, watercolor, white-model, whiteboard, woodcut
+- **Best fits for our channel style guide:** `swiss-motion` + `blueprint` (Mix 1), `iso-infographic` + `dark-keynote` (Mix 3), `dataviz` for numbers, `glass-product` for product ads.
+- **Useful parts:** `styles/<name>/STYLE.md` (the style rules) · `styles/<name>/demo/` (full film code) · `styles/_template/` (start your own style)
+- **Already copied here:** the Blueprint engine → [`../third-party/lemo-opuscar-blueprint/`](../third-party/lemo-opuscar-blueprint/)
+- **How to fetch:** sparse-checkout one style: `'/styles/<name>/' '/LICENSE'`. Font files are not in the repo; get them from google/fonts as named in each style's CREDITS.
 
 ---
 
