@@ -8,6 +8,7 @@ Each folder keeps its original licence file. To update a folder, fetch the same 
 |---|---|---|---|---|
 | `skills/impeccable/` | https://github.com/pbakaus/impeccable | `02523ae` | `plugin/skills/impeccable/`, `LICENSE`, `NOTICE.md` | Apache-2.0 |
 | `skills/taste-skill/` | https://github.com/Leonxlnx/taste-skill | `12af471` | `skills/taste-skill/`, `LICENSE` | MIT |
+| `skills/taste-skill-classic/` | https://github.com/Leonxlnx/taste-skill | `ce26fc2` (2026-09-26, before the repo was reduced to one skill) | `skills/` brandkit, brutalist-skill, gpt-tasteskill, image-to-code-skill, imagegen-frontend-mobile, imagegen-frontend-web, minimalist-skill, output-skill, redesign-skill, soft-skill, stitch-skill, taste-skill-v1, `skills/llms.txt`, `LICENSE` | MIT |
 | `skills/anthropic/` | https://github.com/anthropics/skills | `ca45fc4` | `skills/canvas-design/`, `skills/theme-factory/`, `skills/frontend-design/`, `skills/algorithmic-art/` (each with its `LICENSE.txt`), `THIRD_PARTY_NOTICES.md` | Apache-2.0; fonts SIL OFL 1.1 (`canvas-design/canvas-fonts/*-OFL.txt`) |
 | `skills/brand-styles/` | https://github.com/VoltAgent/awesome-design-md | `fcc7028` | `design-md/`, `LICENSE` | MIT |
 | `assets/icons/tabler/` | https://github.com/tabler/tabler-icons | `ed177a0` | `icons/`, `LICENSE` | MIT |

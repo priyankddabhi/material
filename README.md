@@ -19,6 +19,7 @@ material/
 ├─ skills/          AI design skills (instructions an agent follows)
 │  ├─ impeccable/      design vocabulary: polish, critique, layout, typeset, colorize…
 │  ├─ taste-skill/     art direction for websites
+│  ├─ taste-skill-classic/  12 extra skills: brandkit, minimalist, soft (premium), redesign, brutalist, mockups…
 │  ├─ anthropic/       frontend-design · canvas-design (+29 fonts) · theme-factory (10 themes) · algorithmic-art
 │  └─ brand-styles/    84 brand design systems (DESIGN.md)
 ├─ assets/          ready files to use directly

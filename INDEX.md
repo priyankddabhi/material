@@ -87,6 +87,15 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 | professional look, anti-slop, critique, audit | [`skills/impeccable/`](skills/impeccable/) |
 | art direction, taste, landing page, portfolio | [`skills/taste-skill/`](skills/taste-skill/) |
 | distinctive aesthetic direction | [`skills/anthropic/frontend-design/`](skills/anthropic/frontend-design/) |
+| premium / luxury / expensive look | [`skills/taste-skill-classic/soft-skill/`](skills/taste-skill-classic/soft-skill/) |
+| minimalist, editorial, monochrome, Notion / Linear style | [`skills/taste-skill-classic/minimalist-skill/`](skills/taste-skill-classic/minimalist-skill/) |
+| brutalist, Swiss, terminal, raw | [`skills/taste-skill-classic/brutalist-skill/`](skills/taste-skill-classic/brutalist-skill/) |
+| redesign / upgrade an existing website | [`skills/taste-skill-classic/redesign-skill/`](skills/taste-skill-classic/redesign-skill/) |
+| brand kit, logo concepts, identity board | [`skills/taste-skill-classic/brandkit/`](skills/taste-skill-classic/brandkit/) |
+| website or app mockup images (no code) | [`skills/taste-skill-classic/imagegen-frontend-web/`](skills/taste-skill-classic/imagegen-frontend-web/) · [`imagegen-frontend-mobile/`](skills/taste-skill-classic/imagegen-frontend-mobile/) |
+| design image first, then code it | [`skills/taste-skill-classic/image-to-code-skill/`](skills/taste-skill-classic/image-to-code-skill/) |
+| GSAP-animated premium landing page | [`skills/taste-skill-classic/gpt-tasteskill/`](skills/taste-skill-classic/gpt-tasteskill/) |
+| write a DESIGN.md (Google Stitch) | [`skills/taste-skill-classic/stitch-skill/`](skills/taste-skill-classic/stitch-skill/) |
 | style direction from a real brand | [`skills/brand-styles/`](skills/brand-styles/) |
 | components, blocks, themes not in this repo (shadcn/ui, daisyUI, Preline, HyperUI…) | [`catalog/repos.md`](catalog/repos.md) |
 | inspiration websites | [`catalog/websites.md`](catalog/websites.md) |
