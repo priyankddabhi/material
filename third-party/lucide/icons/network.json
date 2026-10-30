@@ -1,0 +1,17 @@
+{
+  "$schema": "../icon.schema.json",
+  "contributors": [
+    "ericfennis",
+    "johnletey",
+    "csandman",
+    "karsa-mistmere"
+  ],
+  "use-cases": [],
+  "tags": [
+    "tree"
+  ],
+  "categories": [
+    "development",
+    "connectivity"
+  ]
+}

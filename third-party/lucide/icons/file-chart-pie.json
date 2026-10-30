@@ -1,0 +1,28 @@
+{
+  "$schema": "../icon.schema.json",
+  "contributors": [
+    "karsa-mistmere",
+    "danielbayley",
+    "jguddas"
+  ],
+  "use-cases": [],
+  "tags": [
+    "$extends:file",
+    "statistics",
+    "analytics",
+    "diagram",
+    "graph",
+    "presentation"
+  ],
+  "categories": [
+    "$extends:file",
+    "charts"
+  ],
+  "aliases": [
+    {
+      "name": "file-pie-chart",
+      "deprecated": true,
+      "deprecationReason": "alias.name"
+    }
+  ]
+}
