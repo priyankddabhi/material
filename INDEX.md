@@ -49,6 +49,8 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 ## Animation and video
 | Keywords | Path |
 |---|---|
+| ★ video workflow, AI video prompt template, camera angles, parallax, whip cut, text on a circle, sound effects, mix | [`guides/animation/video-playbook.md`](guides/animation/video-playbook.md) |
+| sound effects generator (whoosh, impact, tick…) | [`guides/animation/tools/sfx_synth.py`](guides/animation/tools/sfx_synth.py) |
 | ★ code recipes: punch word, progress ring, 3D flip, stagger, motion blur, orbit, wipe, push-in, voice sync, counter | [`guides/animation/motion-recipes.md`](guides/animation/motion-recipes.md) |
 | ★ focal point, easing, camera, motion rules | [`guides/animation/motion-principles.md`](guides/animation/motion-principles.md) |
 | ★ GSAP timeline, seek, render frames, SplitText, MotionPath | [`guides/animation/gsap-notes.md`](guides/animation/gsap-notes.md) |
