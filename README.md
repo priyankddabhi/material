@@ -14,7 +14,8 @@ material/
 ├─ guides/          ★ OUR RULES — read first, they win over everything else
 │  ├─ boss-mode.md     how the AI should work (owner mindset, reuse first, verify)
 │  ├─ layout/          margins, spacing, whitespace, breakpoints
-│  ├─ animation/       motion rules, code recipes, GSAP/SVG notes, reel lessons
+│  ├─ animation/       motion rules, code recipes, GSAP/SVG notes, reel lessons, video playbook, SFX tool
+│  ├─ metaweek/        ★ 16:9 long-video kit: engine, voice, render, SFX, master prompt, demo, pi-reel example
 │  └─ product-photo/   composition, colour, lighting, type, prompts, QC, reel lessons
 ├─ skills/          AI design skills (instructions an agent follows)
 │  ├─ impeccable/      design vocabulary: polish, critique, layout, typeset, colorize…
@@ -24,20 +25,21 @@ material/
 │  └─ brand-styles/    84 brand design systems (DESIGN.md)
 ├─ assets/          ready files to use directly
 │  ├─ fonts/           signpost to all 33 font families
-│  ├─ icons/           tabler (6,257) · lucide (1,998)
+│  ├─ icons/           tabler (6,257: outline + filled)
 │  └─ colors/          tailwind colour, spacing, type and shadow scale
 ├─ libraries/       code to load or import
 │  ├─ anime/  animate-css/  chartjs/  roughjs/
 │  ├─ magicui/         79 effects: patterns, glow, shine, number ticker, text effects
 │  └─ blueprint-engine/  blueprint-drawing video style + its fonts
-└─ catalog/         links only: our scored tools index (~90 tools), 20 more repos, 11 websites
+├─ catalog/         links only: our scored tools index (~90 tools), 20 more repos, 11 websites
+└─ tools/           check_index.py: finds broken links + unindexed folders (run after every change)
 ```
 
 ## Task router
 | Task | 1. Our rules | 2. Skill | 3. Assets / libraries |
 |---|---|---|---|
 | **Website / landing page** | [`guides/layout/`](guides/layout/) | [`skills/impeccable`](skills/impeccable/) + [`skills/taste-skill`](skills/taste-skill/) · style direction from [`skills/brand-styles`](skills/brand-styles/) | [`assets/fonts`](assets/fonts/README.md), [`assets/colors`](assets/colors/tailwind/theme.css), [`assets/icons`](assets/icons/), [`libraries/magicui`](libraries/magicui/) |
-| **Long horizontal explainer (5–6 min, voice + SFX)** | [`metaweek/MASTER-PROMPT.md`](metaweek/MASTER-PROMPT.md) (paste into a new chat) + [`metaweek/README.md`](metaweek/README.md) | — | `metaweek/engine/` (kit.js, make_voice.py, render.mjs, mix.py) |
+| **Long horizontal explainer (5–6 min, voice + SFX)** | [`guides/metaweek/MASTER-PROMPT.md`](guides/metaweek/MASTER-PROMPT.md) (paste into a new chat) + [`guides/metaweek/README.md`](guides/metaweek/README.md) | — | `guides/metaweek/engine/` (kit.js, make_voice.py, render.mjs, mix.py) |
 | **Video / animated infographic** | [`guides/animation/`](guides/animation/README.md) (start with `video-playbook.md`, then `motion-recipes.md`) + [`guides/layout/margin-rules.md`](guides/layout/margin-rules.md) | — | GSAP (`npm install gsap`) or [`libraries/anime`](libraries/anime/), [`libraries/chartjs`](libraries/chartjs/), [`libraries/blueprint-engine`](libraries/blueprint-engine/), icons, fonts · more styles: [`catalog/repos.md`](catalog/repos.md) → lemo-opuscar |
 | **Product photo / ad image** | [`guides/product-photo/`](guides/product-photo/README.md) | [`skills/anthropic/canvas-design`](skills/anthropic/canvas-design/) | fonts, [`theme-factory`](skills/anthropic/theme-factory/) palettes, brand styles |
 | **Static infographic / poster** | [`guides/layout/`](guides/layout/) | [`skills/anthropic/canvas-design`](skills/anthropic/canvas-design/) | icons, colours, [`libraries/roughjs`](libraries/roughjs/), [`libraries/chartjs`](libraries/chartjs/) |

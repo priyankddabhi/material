@@ -12,7 +12,6 @@ Each folder keeps its original licence file. To update a folder, fetch the same 
 | `skills/anthropic/` | https://github.com/anthropics/skills | `ca45fc4` | `skills/canvas-design/`, `skills/theme-factory/`, `skills/frontend-design/`, `skills/algorithmic-art/` (each with its `LICENSE.txt`), `THIRD_PARTY_NOTICES.md` | Apache-2.0; fonts SIL OFL 1.1 (`canvas-design/canvas-fonts/*-OFL.txt`) |
 | `skills/brand-styles/` | https://github.com/VoltAgent/awesome-design-md | `fcc7028` | `design-md/`, `LICENSE` | MIT |
 | `assets/icons/tabler/` | https://github.com/tabler/tabler-icons | `ed177a0` | `icons/`, `LICENSE` | MIT |
-| `assets/icons/lucide/` | https://github.com/lucide-icons/lucide | `81875c8` | `icons/`, `LICENSE` | ISC |
 | `assets/colors/tailwind/` | https://github.com/tailwindlabs/tailwindcss | `8cc0551` | `packages/tailwindcss/theme.css`, `LICENSE` | MIT |
 | `libraries/magicui/` | https://github.com/magicuidesign/magicui | `efe76fc` | `apps/www/registry/magicui/` → `components/`, `apps/www/registry/lib/` → `lib/`, `LICENSE.md` | MIT |
 | `libraries/anime/` | https://github.com/juliangarnier/anime | `01b81be` | `dist/bundles/`, `LICENSE.md` | MIT |
@@ -30,7 +29,9 @@ Each folder keeps its original licence file. To update a folder, fetch the same 
 | `guides/boss-mode.md` | Our local notes folder (`become_boss.md`) | Copied unchanged |
 | `catalog/tools-index.md` | Our local notes folder (`AI-RESOURCE-INDEX.md`, verified 2026-10-05) | Original text unchanged; an "Updates 2026-10-30" note added at the top |
 | `guides/animation/motion-recipes.md`, all `README.md`, `AGENTS.md`, `INDEX.md` | Written 2026-10-30 | New |
-| `metaweek/` (engine, demo, brief, master prompt, `examples/pi-reel/` = our pi reel source) | Written 2026-11-03 | New; GSAP and playwright-core come from npm (not stored); Kokoro model downloaded by the user (not stored) |
+| `guides/metaweek/` (engine, demo, brief, master prompt, `examples/pi-reel/` = our pi reel source) | Written 2026-11-03 | New; GSAP and playwright-core come from npm (not stored); Kokoro model downloaded by the user (not stored) |
 | `guides/animation/video-playbook.md`, `guides/animation/tools/sfx_synth.py` | Written 2026-11-02 from our pi reel build + notes in our own words from 4 sites (listed at the end of the playbook; eastling/awesome-opus-5.5-video-prompts is CC0 1.0) | New; no third-party text or audio copied |
+
+Removed 2026-11-03: `assets/icons/lucide/` (1,998 icons, a near-duplicate of Tabler; fetch from https://github.com/lucide-icons/lucide if ever needed).
 
 Not copied on purpose: GSAP (own licence, use `npm install gsap`), and everything in [`catalog/`](catalog/README.md).

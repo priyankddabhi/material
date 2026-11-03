@@ -8,7 +8,7 @@ You are using **material**, a design library for making websites, videos / anima
 1. **Find the task** in the router in [`README.md`](README.md), or search [`INDEX.md`](INDEX.md) by keyword (font, glow, progress ring, margin, palette…).
 2. **Read our rules first** in [`guides/`](guides/README.md). They come from real projects. When a skill or library says something different, **our rules win**.
 3. **Then use a skill** from [`skills/`](skills/README.md) for taste and quality checks, and **assets / libraries** from [`assets/`](assets/README.md) and [`libraries/`](libraries/README.md) for the actual files.
-4. **Open only what the task needs.** Do not load whole folders of icons or fonts; pick files by name (Lucide icons have a `.json` file with search tags next to each `.svg`).
+4. **Open only what the task needs.** Do not load whole folders of icons or fonts; pick files by name (every Tabler icon `.svg` starts with a `tags: [...]` comment: search those, e.g. `grep -l "tags:.*padlock" assets/icons/tabler/outline/*.svg`).
 5. **Nothing fits?** Check [`catalog/repos.md`](catalog/repos.md) and fetch only the folder it names, or [`catalog/websites.md`](catalog/websites.md).
 
 ## Quality loop (always)
@@ -27,3 +27,4 @@ You are using **material**, a design library for making websites, videos / anima
 ## Do not
 - Do not invent files or paths; if a path in a note does not exist (old notes mention `~/workspace/...`), ignore it.
 - Do not change files under `skills/`, `assets/` or `libraries/` in place; they are verified copies of their source. Copy them into your project instead.
+- Do not add, move or remove anything without updating `README.md` / `INDEX.md` / the folder README, then run `python tools/check_index.py` (it must print OK).

@@ -1,6 +1,6 @@
 > **Updates 2026-10-30** — added when this file moved into this repo. Everything below the line is the original text, unchanged.
 > - The **Folder map** below describes the old local `added/` folder; those files are not in this repo. Use [`../README.md`](../README.md) and [`../INDEX.md`](../INDEX.md) here instead.
-> - **Copied into this repo:** impeccable, taste-skill, Anthropic skills, awesome-design-md, Tabler + Lucide icons, Tailwind theme, Magic UI, Anime.js, Rough.js, Chart.js, Animate.css — see [`../SOURCES.md`](../SOURCES.md). 20 more repos with fetch paths: [`repos.md`](repos.md).
+> - **Copied into this repo:** impeccable, taste-skill, Anthropic skills, awesome-design-md, Tabler icons (Lucide removed 2026-11-03 as a near-duplicate), Tailwind theme, Magic UI, Anime.js, Rough.js, Chart.js, Animate.css — see [`../SOURCES.md`](../SOURCES.md). 20 more repos with fetch paths: [`repos.md`](repos.md).
 > - **cosscom/coss** (listed under Origin UI) is now an email API, not a UI kit.
 > - **PrimeNG, PrimeReact, PrimeVue** now get security fixes only (they moved to PrimeUI).
 > - **Gitleaks** is feature-complete; its author moved to "Betterleaks".

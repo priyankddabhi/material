@@ -33,7 +33,7 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 | Keywords | Path |
 |---|---|
 | outline icons, filled icons, 24 px | [`assets/icons/tabler/outline/`](assets/icons/tabler/outline/) · [`assets/icons/tabler/filled/`](assets/icons/tabler/filled/) |
-| icons with search tags / categories | [`assets/icons/lucide/`](assets/icons/lucide/) (read `name.json`) |
+| icons with search tags / categories | [`assets/icons/tabler/`](assets/icons/tabler/) (`tags:` and `category:` comment at the top of each `.svg`) |
 
 ## Patterns, backgrounds, premium look, badges
 | Keywords | Path |
@@ -49,7 +49,7 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 ## Animation and video
 | Keywords | Path |
 |---|---|
-| ★ long 16:9 explainer video kit (engine, voice, render, SFX, master prompt for a new chat) | [`metaweek/`](metaweek/README.md) → start with [`metaweek/MASTER-PROMPT.md`](metaweek/MASTER-PROMPT.md) |
+| ★ long 16:9 explainer video kit (engine, voice, render, SFX, master prompt for a new chat) | [`guides/metaweek/`](guides/metaweek/README.md) → start with [`guides/metaweek/MASTER-PROMPT.md`](guides/metaweek/MASTER-PROMPT.md) |
 | ★ video workflow, AI video prompt template, camera angles, parallax, whip cut, text on a circle, sound effects, mix | [`guides/animation/video-playbook.md`](guides/animation/video-playbook.md) |
 | sound effects generator (whoosh, impact, tick…) | [`guides/animation/tools/sfx_synth.py`](guides/animation/tools/sfx_synth.py) |
 | ★ code recipes: punch word, progress ring, 3D flip, stagger, motion blur, orbit, wipe, push-in, voice sync, counter | [`guides/animation/motion-recipes.md`](guides/animation/motion-recipes.md) |
