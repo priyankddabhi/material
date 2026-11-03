@@ -30,6 +30,7 @@ Each folder keeps its original licence file. To update a folder, fetch the same 
 | `guides/boss-mode.md` | Our local notes folder (`become_boss.md`) | Copied unchanged |
 | `catalog/tools-index.md` | Our local notes folder (`AI-RESOURCE-INDEX.md`, verified 2026-10-05) | Original text unchanged; an "Updates 2026-10-30" note added at the top |
 | `guides/animation/motion-recipes.md`, all `README.md`, `AGENTS.md`, `INDEX.md` | Written 2026-10-30 | New |
+| `metaweek/` (engine, demo, brief, master prompt, `examples/pi-reel/` = our pi reel source) | Written 2026-11-03 | New; GSAP and playwright-core come from npm (not stored); Kokoro model downloaded by the user (not stored) |
 | `guides/animation/video-playbook.md`, `guides/animation/tools/sfx_synth.py` | Written 2026-11-02 from our pi reel build + notes in our own words from 4 sites (listed at the end of the playbook; eastling/awesome-opus-5.5-video-prompts is CC0 1.0) | New; no third-party text or audio copied |
 
 Not copied on purpose: GSAP (own licence, use `npm install gsap`), and everything in [`catalog/`](catalog/README.md).

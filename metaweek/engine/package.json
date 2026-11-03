@@ -1,0 +1,10 @@
+{
+  "name": "metaweek-engine",
+  "private": true,
+  "type": "module",
+  "description": "16:9 explainer video engine: GSAP timeline pages rendered frame by frame with Playwright, then ffmpeg",
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "playwright-core": "^1.64.1"
+  }
+}

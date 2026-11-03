@@ -1,0 +1,521 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Pi never ends</title>
+<style>
+  @font-face { font-family: "Instrument Sans"; src: url(/material/skills/anthropic/canvas-design/canvas-fonts/InstrumentSans-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: "Instrument Serif"; src: url(/material/skills/anthropic/canvas-design/canvas-fonts/InstrumentSerif-Italic.ttf); font-style: italic; }
+  @font-face { font-family: "Geist Mono"; src: url(/material/skills/anthropic/canvas-design/canvas-fonts/GeistMono-Regular.ttf); font-weight: 400; }
+  @font-face { font-family: "Geist Mono"; src: url(/material/skills/anthropic/canvas-design/canvas-fonts/GeistMono-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: "Big Shoulders"; src: url(/material/skills/anthropic/canvas-design/canvas-fonts/BigShoulders-Bold.ttf); font-weight: 700; }
+  /* dark THEME, not black: navy + coffee + maroon + burnt orange, cream ink */
+  :root { --ink: #F0E6D6; --dim: rgba(240,230,214,.55); --or: #C9621F; --or2: #E3843D; --mar: #6E1E2B; --mar2: #92303F; --cof: #3A2A20; --blu: #1F3656; --bp: #6F98C8; --bg: #151A26; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #stage { position: absolute; inset: 0; overflow: hidden; color: var(--ink);
+    background: radial-gradient(85% 45% at 12% 8%, #243860 0%, rgba(36,56,96,0) 70%),
+                radial-gradient(90% 50% at 92% 96%, #43291C 0%, rgba(67,41,28,0) 72%),
+                linear-gradient(180deg, #172036 0%, #151A26 48%, #1E1719 100%); }
+  .abs { position: absolute; }
+  svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  #cam, #tcam { position: absolute; inset: 0; perspective: 1000px; perspective-origin: 50% 46%; }
+  #world, #words, .layer { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .bs { font-family: "Big Shoulders"; font-weight: 700; line-height: .8; letter-spacing: -.01em; }
+  .sw { font-family: "Instrument Sans"; font-weight: 700; letter-spacing: -.035em; text-transform: uppercase; line-height: .9; }
+  .mono { font: 700 28px "Geist Mono"; letter-spacing: .14em; text-transform: uppercase; }
+  /* neo-brutalist slab: flat fill, hard offset shadow, no blur */
+  .slab { position: absolute; padding: 16px 28px 20px; box-shadow: 14px 14px 0 var(--mar); white-space: nowrap; }
+  .cell { position: absolute; display: flex; align-items: center; justify-content: center; border: 3px solid rgba(240,230,214,.32); background: rgba(21,26,38,.82); }
+  .chap { left: 96px; top: 292px; font: 700 28px "Geist Mono"; letter-spacing: .14em; }
+  .chapn { right: 96px; top: 292px; font: 400 28px "Geist Mono"; letter-spacing: .14em; color: var(--dim); }
+  .seg { position: absolute; top: 344px; height: 6px; background: rgba(240,230,214,.14); }
+  .seg b { display: block; height: 100%; width: 0; background: var(--or); }
+  #cap { left: 96px; top: 1318px; max-width: 784px; }
+  #cap span { display: inline-block; font: 700 50px/1.12 "Instrument Sans"; letter-spacing: -.01em; padding: 10px 20px 14px; background: #2A1E18; box-shadow: 10px 10px 0 var(--mar); }
+  #grain { position: absolute; inset: -40px; pointer-events: none; mix-blend-mode: screen; opacity: .06; }
+  #vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 85% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.5) 100%); }
+</style>
+<script src="/fb-templates/node_modules/gsap/dist/gsap.min.js"></script>
+<script src="/fb-templates/node_modules/gsap/dist/CustomEase.min.js"></script>
+</head><body>
+<div id="stage"></div>
+<script>
+gsap.registerPlugin(CustomEase);
+CustomEase.create('swiss', 'M0,0 C0.7,0 0.2,1 1,1');
+const NS = 'http://www.w3.org/2000/svg';
+const E = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const H = (html, parent) => { const t = document.createElement('template'); t.innerHTML = html.trim(); const e = t.content.firstElementChild; if (parent) parent.appendChild(e); return e; };
+const clamp = gsap.utils.clamp;
+let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+// pi digits, exact (BigInt series), so every digit on screen is real
+const PI = (() => { let i = 1n, x = 3n * (10n ** 2120n), p = x; while (x > 0n) { x = x * i / ((i + 1n) * 4n); i += 2n; p += x / i; } const s = (p / (10n ** 20n)).toString(); return s[0] + '.' + s.slice(1, 2100); })();
+
+(async () => {
+  const dir = new URLSearchParams(location.search).get('dir') || '';
+  const SC = await (await fetch(dir + 'schedule.json?' + Date.now())).json();
+  const L = Object.fromEntries(SC.lines.map((l) => [l.id, l]));
+  const T = (id) => L[id].start;
+  const wt = (id, re) => { const w = L[id].words.find((x) => re.test(x.w)); if (!w) console.error('no word', id, re); return w ? w.s : L[id].start; };
+  await Promise.all(['700 100px "Instrument Sans"', 'italic 100px "Instrument Serif"', '400 30px "Geist Mono"', '700 30px "Geist Mono"', '700 100px "Big Shoulders"'].map((f) => document.fonts.load(f)));
+  const C = { ink: '#F0E6D6', dim: 'rgba(240,230,214,.55)', or: '#C9621F', or2: '#E3843D', mar: '#6E1E2B', mar2: '#92303F', blu: '#1F3656', bp: '#6F98C8', cof: '#3A2A20', bg: '#151A26' };
+  const st = document.getElementById('stage');
+  const tl = gsap.timeline({ paused: true, defaults: { ease: 'swiss' } });
+  const END = SC.end;
+  const life = [];                                   // per-frame functions (seek() skips onUpdate)
+  const SFX = []; const sfx = (t, type, g = 1, d) => SFX.push({ t: +t.toFixed(3), type, g, d });
+  window.SFX = SFX;
+  const mctx = document.createElement('canvas').getContext('2d');
+  const monoW = (size) => { mctx.font = `700 ${size}px "Geist Mono"`; return mctx.measureText('0').width; };
+
+  /* ---------- background (outside the camera): blueprint micro-grid + Swiss column grid + slow construction circles */
+  const bg = E('svg', { width: 1080, height: 1920 }, st);
+  for (let x = 0; x <= 1080; x += 36) E('line', { x1: x, x2: x, y1: 0, y2: 1920, stroke: 'rgba(111,152,200,.05)', 'stroke-width': 1 }, bg);
+  for (let y = 0; y <= 1920; y += 36) E('line', { x1: 0, x2: 1080, y1: y, y2: y, stroke: 'rgba(111,152,200,.05)', 'stroke-width': 1 }, bg);
+  for (let k = 0; k <= 12; k++) E('line', { x1: 96 + k * 74, x2: 96 + k * 74, y1: 0, y2: 1920, stroke: 'rgba(240,230,214,.035)', 'stroke-width': 2 }, bg);
+  const cons = E('g', {}, bg);
+  [180, 360, 540, 720].forEach((r, i) => E('circle', { cx: 540, cy: 880, r, fill: 'none', stroke: 'rgba(111,152,200,.07)', 'stroke-width': 2, 'stroke-dasharray': i % 2 ? '4 14' : 'none' }, cons));
+  for (let a = 0; a < 12; a++) { const q = a * Math.PI / 6; E('line', { x1: 540, y1: 880, x2: 540 + Math.cos(q) * 760, y2: 880 + Math.sin(q) * 760, stroke: 'rgba(111,152,200,.05)', 'stroke-width': 1.5 }, cons); }
+  const glow = H('<div class="abs" style="width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(201,98,31,.12) 0%,rgba(146,48,63,.06) 40%,rgba(146,48,63,0) 66%)"></div>', st);
+  life.push((t) => { cons.setAttribute('transform', `rotate(${t * 2.2} 540 880)`); glow.style.transform = `translate(${-40 + Math.sin(t / 3.7) * 200}px, ${160 + Math.cos(t / 4.3) * 220}px)`; });
+
+  /* ---------- camera: graphics move fully, type moves less (parallax depth). Wide lens = short perspective */
+  const camEl = H('<div id="cam"></div>', st), world = H('<div id="world"></div>', camEl);
+  const tcamEl = H('<div id="tcam"></div>', st), words = H('<div id="words"></div>', tcamEl);
+  const K = (v, k) => { const o = {}; for (const key in v) { const x = v[key]; o[key] = typeof x !== 'number' ? x : key === 'scale' ? 1 + (x - 1) * k : x * k; } return o; };
+  function cam(at, dur, from, to, ease = 'power2.inOut', k = .35, origin = '540px 880px') {
+    tl.fromTo(world, { ...from, transformOrigin: origin }, { ...to, transformOrigin: origin, duration: dur, ease, immediateRender: false }, at);
+    tl.fromTo(words, { ...K(from, k), transformOrigin: origin }, { ...K(to, k), transformOrigin: origin, duration: dur, ease, immediateRender: false }, at);
+  }
+  const layer = (par) => { const d = H('<div class="layer"></div>', par); return d; };
+  const scene = () => { const g = layer(world), w = layer(words); gsap.set([g, w], { autoAlpha: 0 }); return { g, w }; };
+  gsap.set([camEl, tcamEl], { filter: 'blur(0px)' });
+  // whip cut: blur out, swap scenes, blur in (+ whoosh)
+  function cut(at, a, b) {
+    tl.to([camEl, tcamEl], { filter: 'blur(16px)', duration: .14, ease: 'power2.in' }, at - .14);
+    tl.set([a.g, a.w], { autoAlpha: 0 }, at); tl.set([b.g, b.w], { autoAlpha: 1 }, at);
+    tl.to([camEl, tcamEl], { filter: 'blur(0px)', duration: .26, ease: 'power2.out' }, at);
+    sfx(at - .2, 'whoosh', 1);
+  }
+
+  /* ---------- helpers */
+  const P = (o, u, v, z) => [o[0] + .866 * (u - v), o[1] + .5 * (u + v) - z];
+  const pts = (a) => a.map((p) => p.map((n) => n.toFixed(1)).join(',')).join(' ');
+  const poly = (a, fill, par, extra = {}) => E('polygon', { points: pts(a), fill, stroke: fill, 'stroke-width': .7, ...extra }, par);
+  function box(par, o, u, v, du, dv, h, tone) {                          // iso box, 3 tones, no outlines
+    const g = E('g', {}, par);
+    poly([P(o, u, v + dv, h), P(o, u + du, v + dv, h), P(o, u + du, v + dv, 0), P(o, u, v + dv, 0)], tone[1], g);
+    poly([P(o, u + du, v, h), P(o, u + du, v + dv, h), P(o, u + du, v + dv, 0), P(o, u + du, v, 0)], tone[2], g);
+    poly([P(o, u, v, h), P(o, u + du, v, h), P(o, u + du, v + dv, h), P(o, u, v + dv, h)], tone[0], g);
+    return g;
+  }
+  const TONE = { steel: ['#4B607F', '#2E3E5B', '#202C44'], or: ['#E0853F', '#B85A1E', '#8C4318'], mar: ['#A43B4B', '#7A2533', '#5A1A25'], cof: ['#7A5A44', '#54392A', '#3B281E'], ground: '#1A2133' };
+  let uid = 0;
+  // text set on a circle (round Swiss type). parts = [[string, css], ...]; reads clockwise over the top
+  function ringText(par, cx, cy, r, parts, size, weight = 700) {
+    const id = 'rp' + (uid++), g = E('g', {}, par);
+    E('path', { id, d: `M ${cx - r} ${cy} a ${r} ${r} 0 1 1 ${2 * r} 0 a ${r} ${r} 0 1 1 ${-2 * r} 0`, fill: 'none' }, g);
+    const n = parts.reduce((a, p) => a + p[0].length, 0), ls = (2 * Math.PI * r - n * monoW(size)) / n;
+    const tx = E('text', { style: `font:${weight} ${size}px "Geist Mono";letter-spacing:${ls.toFixed(2)}px` }, g);
+    const tp = E('textPath', { href: '#' + id }, tx);
+    const spans = parts.map(([s, css]) => { const sp = E('tspan', { style: css }, tp); sp.textContent = s; return sp; });
+    return { g, spans, spin: (deg) => g.setAttribute('transform', `rotate(${deg} ${cx} ${cy})`) };
+  }
+  function draw(el, at, dur, ease = 'power2.inOut') {                     // DrawSVG by dash offset
+    const len = el.getTotalLength(); gsap.set(el, { attr: { 'stroke-dasharray': `${len} ${len}`, 'stroke-dashoffset': len } });
+    tl.to(el, { attr: { 'stroke-dashoffset': 0 }, duration: dur, ease }, at);
+  }
+  const arcD = (cx, cy, r, a0, a1) => { const l = (a1 - a0) > Math.PI ? 1 : 0; return `M ${cx + r * Math.cos(a0)} ${cy + r * Math.sin(a0)} A ${r} ${r} 0 ${l} 1 ${cx + r * Math.cos(a1)} ${cy + r * Math.sin(a1)}`; };
+  const pop = (el, at, from = { scale: 1.5, rotation: 8 }, dur = .38) => { tl.fromTo(el, { autoAlpha: 0, ...from }, { autoAlpha: 1, scale: 1, rotation: gsap.getProperty(el, 'rotation') || 0, duration: dur, ease: 'power4.out', immediateRender: false }, at); };
+  const slide = (el, at, dx = -60, dy = 0) => tl.fromTo(el, { autoAlpha: 0, x: dx, y: dy }, { autoAlpha: 1, x: 0, y: 0, duration: .5, ease: 'power3.out', immediateRender: false }, at);
+  const out = (el, at, d = .3) => tl.to(el, { autoAlpha: 0, duration: d, ease: 'power2.in' }, at);
+  const hide = (...els) => gsap.set(els, { autoAlpha: 0 });
+
+  /* ======================= S1 HOOK — π ringed by its own digits; 314 TRILLION vs NASA's 15 (visible on frame 0) */
+  const S1 = scene(); gsap.set([S1.g, S1.w], { autoAlpha: 1 });
+  const v1 = E('svg', { width: 1080, height: 1920 }, S1.g);
+  E('circle', { cx: 540, cy: 840, r: 290, fill: 'rgba(31,54,86,.35)', stroke: C.bp, 'stroke-width': 2, 'stroke-opacity': .45 }, v1);
+  E('circle', { cx: 540, cy: 840, r: 382, fill: 'none', stroke: C.bp, 'stroke-width': 2, 'stroke-opacity': .3, 'stroke-dasharray': '6 12' }, v1);
+  const ring1 = ringText(v1, 540, 840, 322, [[PI.slice(0, 17), `fill:${C.ink}`], [PI.slice(17, 92) + ' ', `fill:${C.ink};fill-opacity:.62`]], 30);
+  const pi1 = E('text', { x: 548, y: 840, 'text-anchor': 'middle', 'dominant-baseline': 'central', style: `font:italic 520px "Instrument Serif";fill:${C.ink}` }, v1); pi1.textContent = 'π';
+  life.push((t) => ring1.spin(-t * 7));
+  const s314 = H(`<div class="slab" style="left:84px;top:1036px;background:var(--or);color:#151A26;transform:rotate(-3deg);display:flex;align-items:center;gap:22px">
+      <div class="bs" style="font-size:250px;letter-spacing:-4px">314</div>
+      <div class="mono" style="font-size:34px;line-height:1.25;color:#151A26">TRILLION<br>DIGITS<br>CALCULATED</div></div>`, S1.w);
+  const s15 = H(`<div class="slab" style="right:96px;top:392px;background:var(--blu);border:4px solid var(--ink);box-shadow:14px 14px 0 var(--or);display:flex;align-items:center;gap:20px">
+      <div class="mono" style="font-size:30px;line-height:1.3">NASA<br>USES</div>
+      <div class="bs" style="font-size:230px">15</div></div>`, S1.w);
+  gsap.set(s15, { rotation: 4 }); hide(s15);
+  gsap.set(world, { rotationX: 26, scale: 1.1, y: -20, transformOrigin: '540px 840px' });
+  gsap.set(words, { rotationX: 9, scale: 1.035, transformOrigin: '540px 840px' });
+  cam(0, T('what') - .3, { rotationX: 26, scale: 1.1, y: -20 }, { rotationX: 4, scale: 1, y: 0 }, 'sine.inOut', .35, '540px 840px');
+  tl.fromTo(s314, { scale: 1 }, { scale: 1.07, duration: .14, yoyo: true, repeat: 1, ease: 'power2.out', immediateRender: false }, wt('hook', /314/));
+  sfx(0.02, 'boom', .8); sfx(wt('hook', /314/), 'impact', .7);
+  pop(s15, wt('nasa0', /NASA/) - .05, { scale: 1.7, rotation: 16 }); sfx(wt('nasa0', /NASA/), 'impact', 1);
+  tl.to(ring1.spans[1], { fillOpacity: .12, duration: .6 }, wt('nasa0', /fifteen/));
+  tl.to(ring1.spans[0], { fill: C.or2, duration: .4 }, wt('nasa0', /fifteen/));
+  tl.to(pi1, { fill: C.or2, duration: .5 }, wt('nasa0', /fifteen/));
+
+  /* ======================= S2 WHAT IS PI — a 3D coin flips flat into a blueprint circle; the diameter wraps around 3 times + a bit */
+  const S2 = scene(); cut(T('what') - .25, S1, S2);
+  const CX = 540, CY = 900, R = 205;
+  const coin = H(`<div class="abs" style="left:${CX - R}px;top:${CY - R}px;width:${2 * R}px;height:${2 * R}px;transform-style:preserve-3d"></div>`, S2.g);
+  for (let k = 15; k >= 0; k--) H(`<div class="abs" style="inset:0;border-radius:50%;transform:translateZ(${-1 - k * 2.6}px);background:${k === 0
+      ? 'repeating-radial-gradient(circle,rgba(111,152,200,0) 0 34px,rgba(111,152,200,.28) 34px 36px),radial-gradient(circle,#4D382A 0%,#3A2A20 70%,#33251C 100%)'
+      : (k % 3 ? '#2A1D16' : '#3A2A20')}"></div>`, coin);
+  gsap.set(coin, { rotationX: 64, rotationZ: -24, y: 40 });
+  const v2 = E('svg', { width: 1080, height: 1920 }, S2.g);
+  const rim = E('circle', { cx: CX, cy: CY, r: R, fill: 'none', stroke: C.ink, 'stroke-width': 4, transform: `rotate(-90 ${CX} ${CY})` }, v2);
+  const around = E('circle', { cx: CX, cy: CY, r: R, fill: 'none', stroke: C.or2, 'stroke-width': 10, 'stroke-linecap': 'round', transform: `rotate(-90 ${CX} ${CY})` }, v2);
+  const aroundLab = ringText(v2, CX, CY, R + 22, [['AROUND · AROUND · AROUND · AROUND · AROUND · ', `fill:${C.or2}`]], 24);
+  const dia = E('line', { x1: CX - R, y1: CY, x2: CX + R, y2: CY, stroke: C.bp, 'stroke-width': 8 }, v2);
+  const diaLab = E('text', { x: CX, y: CY - 22, 'text-anchor': 'middle', style: `font:700 28px "Geist Mono";letter-spacing:6px;fill:${C.bp}` }, v2); diaLab.textContent = 'ACROSS';
+  hide(aroundLab.g, diaLab);
+  life.push((t) => aroundLab.spin(t * 9));
+  // 3 diameters laid around the rim: each = 2 radians of arc; what is left over is the 0.14159…
+  const WR = R + 34, A0 = -Math.PI / 2;
+  const wraps = [C.or, C.ink, C.bp].map((col, i) => E('path', { d: arcD(CX, CY, WR, A0 + i * 2 + .02, A0 + (i + 1) * 2 - .02), fill: 'none', stroke: col, 'stroke-width': 18 }, v2));
+  const gapArc = E('path', { d: arcD(CX, CY, WR, A0 + 6, A0 + 2 * Math.PI), fill: 'none', stroke: C.mar2, 'stroke-width': 18 }, v2);
+  const nums = [1, 2, 3].map((n, i) => { const a = A0 + i * 2 + 1, t = E('text', { x: CX + (WR + 52) * Math.cos(a), y: CY + (WR + 52) * Math.sin(a), 'text-anchor': 'middle', 'dominant-baseline': 'central', style: `font:700 64px "Big Shoulders";fill:${C.ink}` }, v2); t.textContent = n; return t; });
+  const ga = A0 + 6.14, gapLab = E('text', { x: CX + (WR + 40) * Math.cos(ga) - 6, y: CY + (WR + 40) * Math.sin(ga) - 24, 'text-anchor': 'end', style: `font:700 34px "Geist Mono";fill:${C.or2}` }, v2); gapLab.textContent = '+0.14159…';
+  hide(...nums, gapLab);
+  // type
+  const q2 = H(`<div class="abs" style="left:0;width:1080px;top:404px;display:flex;justify-content:center;align-items:center;gap:26px">
+      <div class="bs" style="font-size:150px">SO WHAT IS</div>
+      <div style="width:170px;height:170px;background:var(--mar);box-shadow:12px 12px 0 var(--or);display:flex;align-items:center;justify-content:center;font:italic 190px/1 'Instrument Serif';padding-bottom:28px">π</div>
+      <div class="bs" style="font-size:150px">?</div></div>`, S2.w);
+  const anyc = H(`<div class="slab mono" style="left:50%;top:430px;background:var(--ink);color:#151A26;box-shadow:10px 10px 0 var(--or);font-size:34px;transform:translateX(-50%)">TAKE ANY CIRCLE</div>`, S2.w);
+  const frac = H(`<div class="abs" style="left:0;width:1080px;top:392px;text-align:center">
+      <div class="bs" style="font-size:96px;color:var(--or2)">AROUND</div>
+      <div style="width:420px;height:10px;background:var(--ink);margin:14px auto 12px"></div>
+      <div class="bs" style="font-size:96px;color:var(--bp)">ACROSS</div></div>`, S2.w);
+  const digs2 = '3.14159' + PI.slice(7, 40);
+  const cw = 100, cg = 10, cx0 = (1080 - (7 * cw + 6 * cg)) / 2;
+  const strip = H('<div class="abs" style="left:0;top:1144px;width:1080px;height:150px"></div>', S2.w);
+  const cells2 = [...digs2].map((d, i) => H(`<div class="cell bs" style="left:${cx0 + i * (cw + cg)}px;top:0;width:${cw}px;height:150px;font-size:120px;${i === 0 ? 'background:var(--or);color:#151A26;border-color:var(--or)' : ''}">${d}</div>`, strip));
+  hide(q2, anyc, frac, ...cells2);
+  // timing
+  const t2 = T('what') - .25;
+  cam(t2, .7, { x: 280, rotationY: -26, scale: 1.04 }, { x: 0, rotationY: 0, scale: 1 }, 'power3.out', .35, `${CX}px ${CY}px`);
+  slide(q2, T('what') - .1, 0, 50);
+  tl.fromTo(coin, { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'power3.out', immediateRender: false }, T('what'));
+  out(q2, T('circ') - .2, .25);
+  pop(anyc, T('circ'), { scale: 1.4 });
+  tl.to(coin, { rotationX: 0, rotationZ: 0, y: 0, duration: 1.1, ease: 'power3.inOut' }, wt('circ', /circle/) - .2); sfx(wt('circ', /circle/) - .2, 'swish', .6);
+  draw(rim, wt('circ', /circle/) + .7, .6);
+  out(anyc, wt('circ', /Divide/) - .1, .2);
+  hide(around); tl.set(around, { autoAlpha: 1 }, wt('circ', /around/) - .1);
+  draw(around, wt('circ', /around/) - .1, 1.0, 'power1.inOut'); sfx(wt('circ', /around/) - .1, 'riser', .45, 1.0);
+  tl.to(aroundLab.g, { autoAlpha: 1, duration: .3 }, wt('circ', /around/));
+  slide(frac.children[0], wt('circ', /around/) - .1, 0, 40);
+  hide(dia); tl.set(dia, { autoAlpha: 1 }, wt('circ', /across/) - .15);
+  draw(dia, wt('circ', /across/) - .15, .45, 'power3.out'); sfx(wt('circ', /across/) - .15, 'swish', .5);
+  tl.to(diaLab, { autoAlpha: 1, duration: .3 }, wt('circ', /across/));
+  tl.fromTo(frac.children[1], { autoAlpha: 0, scaleX: 0 }, { autoAlpha: 1, scaleX: 1, duration: .35, immediateRender: false }, wt('circ', /by/));
+  slide(frac.children[2], wt('circ', /across/) - .1, 0, 40);
+  hide(...wraps, gapArc);
+  [wt('same', /always/), wt('same', /get/) + .1, wt('same', /same/)].forEach((at, i) => {
+    tl.set(wraps[i], { autoAlpha: 1 }, at); draw(wraps[i], at, .32, 'power2.out'); pop(nums[i], at + .15, { scale: 1.6 }); sfx(at, 'tick', .9);
+  });
+  tl.to(aroundLab.g, { autoAlpha: 0, duration: .2 }, wt('same', /always/) - .1);
+  tl.set(gapArc, { autoAlpha: 1 }, wt('same', /number/)); draw(gapArc, wt('same', /number/), .3); pop(gapLab, wt('same', /number/) + .1, { scale: 1.5 }); sfx(wt('same', /number/), 'pop', .9);
+  tl.to(gapArc, { attr: { stroke: C.or2 }, duration: .12, yoyo: true, repeat: 5, ease: 'none' }, wt('same', /number/) + .3);
+  out(frac, wt('same', /Three/) - .3, .25); out(nums, wt('same', /Three/) - .3, .2);
+  const spoken = ['Three', 'point', 'one', 'four', 'one', 'five', 'nine'];
+  let wi = L.same.words.findIndex((w) => /^Three/.test(w.w));
+  spoken.forEach((sw_, i) => { const at = L.same.words[wi + i].s - .05; tl.fromTo(cells2[i], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .25, ease: 'power3.out', immediateRender: false }, at); sfx(at, 'type', .8); });
+  // "and it never stops": the digit strip starts running left and never stops
+  const run0 = T('stop') - .05;
+  tl.set(cells2.slice(7), { autoAlpha: 1 }, run0);
+  life.push((t) => { const d = Math.max(0, t - run0); strip.style.transform = `translateX(${-(d * d * 120 + d * 160)}px)`; });
+  cam(T('stop') - .1, 1.6, { x: 0, rotationY: 0, scale: 1 }, { x: -60, rotationY: -12, scale: 1.04 }, 'power2.inOut', .35, `${CX}px ${CY}px`);
+  tl.to([coin, v2], { x: -70, duration: 1.4, ease: 'power2.in' }, T('stop'));
+  sfx(T('stop'), 'roll', .5, 1.2);
+
+  /* ======================= S3 INFINITE — a spiral of real digits; the camera falls into it */
+  const S3 = scene(); cut(T('inf') - .25, S2, S3);
+  const v3 = E('svg', { width: 1080, height: 1920 }, S3.g);
+  const rg = E('radialGradient', { id: 'spg', cx: 540, cy: 880, r: 760, gradientUnits: 'userSpaceOnUse' }, E('defs', {}, v3));
+  [[0, C.or2, 1], [.22, C.ink, .9], [.6, C.ink, .35], [1, C.ink, .1]].forEach(([o, c, a]) => E('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, rg));
+  let sd = ''; for (let th = 0; th <= 19 * Math.PI; th += .04) { const r = 34 + 14.5 * th; sd += (sd ? ' L ' : 'M ') + (540 + r * Math.cos(th)).toFixed(1) + ' ' + (880 + r * Math.sin(th)).toFixed(1); }
+  const spiral = E('g', {}, v3);
+  E('path', { id: 'spath', d: sd, fill: 'none' }, spiral);
+  const stx = E('text', { style: 'font:700 24px "Geist Mono";letter-spacing:2px;fill:url(#spg)' }, spiral);
+  E('textPath', { href: '#spath' }, stx).textContent = PI.slice(0, 2090);
+  life.push((t) => spiral.setAttribute('transform', `rotate(${t * -16} 540 880)`));
+  // big infinity, drawn
+  const inf = E('g', {}, E('svg', { width: 1080, height: 1920 }, S3.w));
+  let ld = ''; for (let a = 0; a <= 2 * Math.PI + .01; a += .02) { const d = 1 + Math.sin(a) ** 2, x = 505 + 290 * Math.cos(a) / d, y = 880 + 290 * Math.sin(a) * Math.cos(a) / d; ld += (ld ? ' L ' : 'M ') + x.toFixed(1) + ' ' + y.toFixed(1); }
+  E('path', { d: ld, fill: 'none', stroke: '#151A26', 'stroke-width': 64, 'stroke-linejoin': 'round' }, inf);
+  const infP = E('path', { d: ld, fill: 'none', stroke: C.or, 'stroke-width': 30, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, inf);
+  const alm = H(`<div class="abs" style="left:96px;top:398px">
+      <div class="slab mono" style="position:relative;display:inline-block;background:var(--ink);color:#151A26;box-shadow:8px 8px 0 var(--mar);font-size:34px;padding:10px 20px 12px">NOT</div>
+      <div class="sw" style="position:relative;font-size:150px;margin-top:22px">ALMOST<i style="position:absolute;left:-14px;right:-14px;top:52px;height:26px;background:var(--or);transform-origin:0 50%"></i></div></div>`, S3.w);
+  const strike = alm.querySelector('i');
+  const vert = H(`<div class="abs bs" style="left:915px;top:420px;font-size:212px;transform-origin:0 0;transform:rotate(90deg);color:var(--ink);white-space:nowrap">INFINITE</div>`, S3.w);
+  const truly = H(`<div class="slab" style="left:96px;top:1088px;background:var(--or);color:#151A26;box-shadow:14px 14px 0 var(--mar);transform:rotate(-2deg)"><div class="bs" style="font-size:150px">TRULY</div></div>`, S3.w);
+  const ends = H(`<div class="slab bs" style="left:96px;top:968px;background:var(--mar);box-shadow:14px 14px 0 var(--or);font-size:120px;transform:rotate(-2deg)">NEVER ENDS</div>`, S3.w);
+  const reps = H(`<div class="slab bs" style="left:150px;top:1126px;background:var(--blu);border:4px solid var(--ink);box-shadow:14px 14px 0 var(--mar);font-size:120px;transform:rotate(1.5deg)">NEVER REPEATS</div>`, S3.w);
+  const proof = H(`<div class="abs" style="left:96px;top:404px;width:380px;border:8px solid var(--or2);padding:16px 22px 22px;background:rgba(21,26,38,.85);transform:rotate(-7deg)">
+      <div class="mono" style="color:var(--or2);font-size:30px">PROVEN</div>
+      <div class="bs" style="font-size:210px;color:var(--or2);margin:8px 0 6px">1761</div>
+      <div class="mono" style="font-size:26px;color:var(--ink)">J. H. LAMBERT</div></div>`, S3.w);
+  hide(alm, vert, truly, ends, reps, proof, inf);
+  gsap.set(strike, { scaleX: 0 });
+  const t3 = T('inf') - .25;
+  cam(t3, wt('proof', /proven/) - t3, { rotationX: 30, scale: .95, rotationZ: -8 }, { rotationX: 0, scale: 1.75, rotationZ: 4 }, 'power1.inOut', 0, '540px 880px');
+  slide(alm, T('inf'), -80);
+  tl.to(strike, { scaleX: 1, duration: .28, ease: 'power4.out' }, wt('inf', /Truly/) - .15); sfx(wt('inf', /Truly/) - .15, 'swish', .8);
+  pop(truly, wt('inf', /Truly/), { scale: 1.5, rotation: -10 }); sfx(wt('inf', /Truly/) + .05, 'impact', .8);
+  hide(infP); tl.set(infP, { autoAlpha: 1 }, wt('inf', /Truly/)); tl.fromTo(inf, { autoAlpha: 0 }, { autoAlpha: 1, duration: .2, immediateRender: false }, wt('inf', /Truly/));
+  draw(infP, wt('inf', /Truly/), 1.1, 'power2.inOut');
+  tl.fromTo(vert, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: .6, ease: 'power3.out', immediateRender: false }, wt('inf', /Truly/) + .45);
+  out([alm, truly], T('proof') - .25, .25); tl.to(inf, { autoAlpha: .0, duration: .4 }, T('proof') - .2);
+  slide(ends, wt('proof', /end/) - .1, -100); sfx(wt('proof', /end/) - .1, 'swish', .6);
+  slide(reps, wt('proof', /repeat/) - .1, -100); sfx(wt('proof', /repeat/) - .1, 'swish', .6);
+  pop(proof, wt('proof', /1761/) - .15, { scale: 1.8, rotation: -22 }); sfx(wt('proof', /1761/) - .05, 'impact', 1);
+
+  /* ======================= S4 ARCHIMEDES — polygons inside & outside the circle, 6 → 96 sides */
+  const S4 = scene(); cut(T('arch') - .25, S3, S4);
+  const AX = 540, AY = 890, AR = 290;
+  const v4 = E('svg', { width: 1080, height: 1920 }, S4.g);
+  E('circle', { cx: AX, cy: AY, r: AR + 80, fill: 'rgba(31,54,86,.3)' }, v4);
+  const outP = E('path', { fill: 'none', stroke: C.bp, 'stroke-width': 4, 'stroke-linejoin': 'round' }, v4);
+  const circ4 = E('circle', { cx: AX, cy: AY, r: AR, fill: 'none', stroke: C.ink, 'stroke-width': 5, transform: `rotate(-90 ${AX} ${AY})` }, v4);
+  const inP = E('path', { fill: 'rgba(201,98,31,.2)', stroke: C.or2, 'stroke-width': 4, 'stroke-linejoin': 'round' }, v4);
+  const ngon = (n, r) => { let d = ''; for (let k = 0; k < n; k++) { const a = -Math.PI / 2 + 2 * Math.PI * k / n; d += (k ? ' L ' : 'M ') + (AX + r * Math.cos(a)).toFixed(2) + ' ' + (AY + r * Math.sin(a)).toFixed(2); } return d + ' Z'; };
+  const steps = [[T('arch') - .2, 6], [wt('arch', /Archimedes/), 12], [wt('arch', /trapped/), 24], [wt('arch', /between/), 48], [wt('arch', /96/), 96]];
+  steps.slice(1).forEach(([at]) => sfx(at, 'tick', 1));
+  const cnt = H(`<div class="abs" style="right:96px;top:396px;text-align:right">
+      <div class="mono" style="font-size:30px;color:var(--dim)">SIDES</div>
+      <div class="bs" id="nside" style="font-size:230px;color:var(--or2);margin-top:6px">6</div></div>`, S4.w);
+  const nside = cnt.querySelector('#nside');
+  const arch = H(`<div class="abs" style="left:96px;top:404px">
+      <div class="slab mono" style="position:relative;display:inline-block;background:var(--mar);box-shadow:10px 10px 0 var(--or);font-size:32px;padding:10px 20px 12px">≈ 250 BC</div>
+      <div class="sw" style="font-size:78px;margin-top:30px">ARCHI-<br>MEDES</div></div>`, S4.w);
+  const bounds = H(`<div class="abs" style="left:0;width:1080px;top:1196px;display:flex;justify-content:center;align-items:center;gap:18px;font:700 48px 'Geist Mono'">
+      <span style="border:4px solid var(--ink);padding:6px 16px">3.1408</span><span>&lt;</span>
+      <span style="font:italic 84px/1 'Instrument Serif';color:var(--or2)">π</span><span>&lt;</span>
+      <span style="border:4px solid var(--ink);padding:6px 16px">3.1429</span></div>`, S4.w);
+  hide(cnt, arch, bounds);
+  const t4 = T('arch') - .25;
+  cam(t4, .7, { x: -260, rotationY: 28, scale: 1.06 }, { x: 0, rotationY: -6, scale: 1 }, 'power3.out', .35, `${AX}px ${AY}px`);
+  cam(t4 + .7, L.arch.end - t4 - .2, { x: 0, rotationY: -6, scale: 1 }, { x: 0, rotationY: 10, rotationX: 12, scale: 1.05 }, 'sine.inOut', .35, `${AX}px ${AY}px`);
+  draw(circ4, T('arch') - .2, .7);
+  tl.fromTo([inP, outP], { autoAlpha: 0 }, { autoAlpha: 1, duration: .4, immediateRender: false }, T('arch') + .2);
+  slide(cnt, T('arch'), 60); slide(arch, wt('arch', /Archimedes/) - .3, -60);
+  slide(bounds, wt('arch', /shapes/) - .1, 0, 40); sfx(wt('arch', /shapes/) - .1, 'pop', .7);
+  life.push((t) => {
+    let n = 6; for (const [at, k] of steps) if (t >= at) n = k;
+    if (inP._n !== n) { inP._n = n; inP.setAttribute('d', ngon(n, AR)); outP.setAttribute('d', ngon(n, AR / Math.cos(Math.PI / n))); nside.textContent = n; }
+  });
+
+  /* ======================= S5 THE RECORD — one iso server, 110 days, 314 trillion digits */
+  const S5 = scene(); cut(T('rec') - .25, S4, S5);
+  const v5 = E('svg', { width: 1080, height: 1920 }, S5.g);
+  const O5 = [470, 1000];
+  poly([P(O5, -150, -150, 0), P(O5, 330, -150, 0), P(O5, 330, 330, 0), P(O5, -150, 330, 0)], TONE.ground, v5);
+  for (let k = -150; k <= 330; k += 40) {
+    E('polyline', { points: pts([P(O5, k, -150, 0), P(O5, k, 330, 0)]), stroke: 'rgba(111,152,200,.16)', 'stroke-width': 1.5, fill: 'none' }, v5);
+    E('polyline', { points: pts([P(O5, -150, k, 0), P(O5, 330, k, 0)]), stroke: 'rgba(111,152,200,.16)', 'stroke-width': 1.5, fill: 'none' }, v5);
+  }
+  // digit blocks stack up behind-right as the count climbs (painter order: back to front)
+  const cubes = [];
+  for (let z = 0; z < 7; z++) for (const [u, v] of [[190, -130], [250, -70]]) cubes.push(box(v5, O5, u, v, 56, 56, 56, [TONE.or, TONE.mar, TONE.cof][(z + (u > 200 ? 1 : 0)) % 3]));
+  cubes.forEach((c, i) => { const z = Math.floor(i / 2) * 58; c.setAttribute('transform', `translate(0 ${-z})`); });
+  box(v5, O5, 0, 0, 160, 160, 400, TONE.steel);
+  const leds5 = [];
+  for (let z = 30; z < 390; z += 34) {
+    E('polyline', { points: pts([P(O5, 0, 160, z), P(O5, 160, 160, z)]), stroke: '#1A2338', 'stroke-width': 3, fill: 'none' }, v5);
+    E('polyline', { points: pts([P(O5, 160, 0, z), P(O5, 160, 160, z)]), stroke: '#141B2B', 'stroke-width': 3, fill: 'none' }, v5);
+    for (let b = 16; b < 150; b += 18) { const p = P(O5, 160, b, z + 15); leds5.push(E('circle', { cx: p[0], cy: p[1], r: 3.4, fill: rnd() < .4 ? C.or2 : C.bp }, v5)); }
+    const p = P(O5, 24, 160, z + 15), q = P(O5, 110, 160, z + 15);
+    E('line', { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: 'rgba(240,230,214,.18)', 'stroke-width': 6 }, v5);
+  }
+  const srvTag = H(`<div class="slab mono" style="left:96px;top:1080px;background:var(--ink);color:#151A26;box-shadow:10px 10px 0 var(--or);font-size:32px">1 SERVER</div>`, S5.w);
+  const days = H(`<div class="abs" style="left:96px;top:398px">
+      <div class="mono" style="font-size:30px;color:var(--dim)">DAY</div>
+      <div class="bs" id="dayn" style="font-size:200px;margin-top:8px">000</div></div>`, S5.w);
+  const digs = H(`<div class="abs" style="right:96px;top:398px;text-align:right">
+      <div class="mono" style="font-size:30px;color:var(--dim)">DIGITS · TRILLION</div>
+      <div class="bs" id="dign" style="font-size:200px;color:var(--or2);margin-top:8px">0</div></div>`, S5.w);
+  const src5 = H(`<div class="abs mono" style="right:96px;top:1236px;font-size:24px;color:var(--dim);font-weight:400;letter-spacing:.1em">STORAGEREVIEW · GUINNESS 2026</div>`, S5.w);
+  hide(srvTag, days, digs, src5);
+  const dayn = days.querySelector('#dayn'), dign = digs.querySelector('#dign');
+  const t5 = T('rec') - .25;
+  cam(t5, L.rec.end - t5 + .3, { rotationX: 40, y: -160, scale: 1.14 }, { rotationX: 6, y: 0, scale: 1 }, 'power2.out', .3, '540px 860px');
+  slide(srvTag, wt('rec', /server/) - .1, -60); sfx(wt('rec', /server/) - .1, 'pop', .6);
+  slide(days, wt('rec', /ran/) - .2, -60);
+  slide(digs, wt('rec', /reach/) - .2, 60);
+  tl.to(src5, { autoAlpha: 1, duration: .4 }, wt('rec', /digits/));
+  const dA = wt('rec', /ran/), dB = wt('rec', /days/) + .2, gA = wt('rec', /reach/), gB = wt('rec', /trillion/) + .1;
+  sfx(dA, 'roll', .55, dB - dA); sfx(gA, 'roll', .6, gB - gA); sfx(gB, 'impact', .8);
+  const eo = gsap.parseEase('power2.out');
+  life.push((t) => {
+    dayn.textContent = String(Math.round(110 * eo(clamp(0, 1, (t - dA) / (dB - dA))))).padStart(3, '0');
+    const g = eo(clamp(0, 1, (t - gA) / (gB - gA)));
+    dign.textContent = Math.round(314 * g);
+    const nc = Math.round(cubes.length * clamp(0, 1, (t - dA) / (gB - dA)));
+    cubes.forEach((c, i) => { c.style.opacity = i < nc ? 1 : 0; });
+    leds5.forEach((l, i) => { l.style.opacity = Math.sin(t * 7 + i * 2.3) > -.1 ? 1 : .2; });
+  });
+
+  /* ======================= S6 NASA — 15 decimals; a 40-billion-mile circle; zoom in: half an inch */
+  const S6 = scene(); cut(T('jpl') - .25, S5, S6);
+  const GX = 540, GY = 2380, GR = 1500, APX = GX, APY = GY - GR;           // apex of the giant circle = (540, 880)
+  const v6 = E('svg', { width: 1080, height: 1920 }, S6.g);
+  const arcTrue = E('path', { d: arcD(GX, GY, GR, -Math.PI / 2 - .55, -Math.PI / 2 + .55), fill: 'none', stroke: C.ink, 'stroke-width': 2.2 }, v6);
+  const arc15 = E('path', { d: arcD(GX, GY, GR + 4, -Math.PI / 2 - .55, -Math.PI / 2 + .55), fill: 'none', stroke: C.or2, 'stroke-width': 2.2 }, v6);
+  // tiny marks at the apex: only readable once the camera zooms in
+  const mk = E('g', {}, v6);
+  E('line', { x1: APX, y1: APY - 1, x2: APX, y2: APY - 11, stroke: C.ink, 'stroke-width': .6 }, mk);
+  E('path', { d: `M ${APX + 3} ${APY - .6} L ${APX + 3} ${APY - 3.6} M ${APX + 1.8} ${APY - 1.8} L ${APX + 3} ${APY - .6} L ${APX + 4.2} ${APY - 1.8} M ${APX + 1.8} ${APY - 2.4} L ${APX + 3} ${APY - 3.6} L ${APX + 4.2} ${APY - 2.4}`, fill: 'none', stroke: C.bp, 'stroke-width': .35 }, mk);
+  const mt = E('text', { x: APX + 5, y: APY - 8, style: `font:700 4.4px "Geist Mono";fill:${C.bp}` }, mk); mt.textContent = '½ INCH';
+  const lbl6 = E('g', {}, v6);
+  E('path', { id: 'arcLab', d: arcD(GX, GY, GR - 46, -Math.PI / 2 - .3, -Math.PI / 2 + .3), fill: 'none' }, lbl6);
+  const at6 = E('text', { style: `font:700 28px "Geist Mono";letter-spacing:6px;fill:${C.ink}` }, lbl6);
+  E('textPath', { href: '#arcLab', startOffset: '50%', 'text-anchor': 'middle' }, at6).textContent = '← 40,000,000,000 MILES ACROSS →';
+  // iso probe riding the circle
+  const probe = E('g', {}, v6);
+  E('line', { x1: 0, y1: -8, x2: 64, y2: -40, stroke: C.dim, 'stroke-width': 3 }, probe);
+  E('circle', { cx: 64, cy: -40, r: 5, fill: C.bp }, probe);
+  box(probe, [0, 0], -16, -16, 32, 32, 22, TONE.cof);
+  E('ellipse', { cx: -2, cy: -46, rx: 44, ry: 18, fill: '#D9CDB8', transform: 'rotate(-14 -2 -46)' }, probe);
+  E('ellipse', { cx: -2, cy: -44, rx: 30, ry: 11, fill: '#B5A68E', transform: 'rotate(-14 -2 -44)' }, probe);
+  E('line', { x1: -2, y1: -44, x2: -6, y2: -76, stroke: C.ink, 'stroke-width': 3 }, probe);
+  const digs6 = '3.141592653589793', c6w = 48, c6g = 4, c6x = (1080 - (17 * c6w + 16 * c6g)) / 2;
+  const row6 = H('<div class="abs" style="left:0;top:452px;width:1080px;height:90px"></div>', S6.w);
+  const cells6 = [...digs6].map((d, i) => H(`<div class="cell bs" style="left:${c6x + i * (c6w + c6g)}px;top:0;width:${c6w}px;height:90px;font-size:70px;${i > 1 ? 'border-color:var(--or)' : ''}">${d}</div>`, row6));
+  const brk = H(`<div class="abs" style="left:${c6x + 2 * (c6w + c6g)}px;top:556px;width:${15 * (c6w + c6g) - c6g}px;height:18px;border:4px solid var(--or2);border-top:none"></div>`, S6.w);
+  const brkL = H(`<div class="abs mono" style="left:0;width:1080px;text-align:center;top:590px;color:var(--or2);font-size:30px">15 DECIMALS</div>`, S6.w);
+  const jpl = H(`<div class="abs mono" style="left:0;width:1080px;text-align:center;top:396px;font-size:26px;color:var(--dim)">NASA JPL · INTERPLANETARY NAVIGATION</div>`, S6.w);
+  const inch = H(`<div class="slab" style="left:96px;top:1090px;background:var(--mar);box-shadow:14px 14px 0 var(--or);transform:rotate(-2deg)">
+      <div class="mono" style="font-size:30px">OFF BY ABOUT</div><div class="bs" style="font-size:150px;margin-top:6px">½ INCH</div></div>`, S6.w);
+  hide(...cells6, brk, brkL, jpl, inch, lbl6, arcTrue, arc15);
+  const t6 = T('jpl') - .25, zA = wt('inch', /half/) - .75;
+  cam(t6, .7, { x: 260, rotationY: -24, scale: 1.05 }, { x: 0, rotationY: 0, scale: 1 }, 'power3.out', .2, `${APX}px ${APY}px`);
+  cam(t6 + .7, zA - t6 - .7, { x: 0, rotationY: 0, scale: 1 }, { x: 0, rotationX: 22, scale: 1.08 }, 'sine.inOut', .2, `${APX}px ${APY}px`);
+  cam(zA, 1.0, { x: 0, rotationX: 22, scale: 1.08 }, { x: 0, rotationX: 0, scale: 9 }, 'power3.inOut', 0, `${APX}px ${APY}px`);
+  sfx(zA, 'riser', .6, 1.0);
+  tl.to(jpl, { autoAlpha: 1, duration: .4 }, wt('jpl', /NASA/));
+  cells6.forEach((c, i) => { const at = wt('jpl', /fifteen/) - .3 + i * .05; tl.fromTo(c, { autoAlpha: 0, y: -30 }, { autoAlpha: 1, y: 0, duration: .22, ease: 'power3.out', immediateRender: false }, at); if (i > 1 && i % 2) sfx(at, 'type', .6); });
+  tl.fromTo([brk, brkL], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .35, immediateRender: false }, wt('jpl', /decimals/));
+  tl.set([arcTrue, arc15], { autoAlpha: 1 }, T('jpl'));
+  draw(arcTrue, T('jpl'), 1.3); draw(arc15, T('jpl') + .15, 1.3); sfx(T('jpl'), 'swish', .5);
+  tl.to(lbl6, { autoAlpha: 1, duration: .4 }, wt('inch', /miles/) - .2);
+  tl.to([row6, brk, brkL, jpl, lbl6], { autoAlpha: 0, duration: .3 }, zA);
+  pop(inch, wt('inch', /half/) + .1, { scale: 1.6, rotation: -12 }); sfx(wt('inch', /half/) + .15, 'impact', .9);
+  const pa = -Math.PI / 2 - .5, pb = -Math.PI / 2 - .12;
+  life.push((t) => {
+    const k = clamp(0, 1, (t - t6) / (zA - t6)), a = pa + (pb - pa) * k;
+    probe.setAttribute('transform', `translate(${GX + (GR + 10) * Math.cos(a)} ${GY + (GR + 10) * Math.sin(a)}) rotate(${(a + Math.PI / 2) * 180 / Math.PI})`);
+  });
+
+  /* ======================= S7 UNIVERSE — 37 decimals around the visible universe, to one atom */
+  const S7 = scene(); cut(T('uni') - .25, S6, S7);
+  const UX = 540, UY = 900, UR = 330;
+  const v7 = E('svg', { width: 1080, height: 1920 }, S7.g);
+  const stars = [];
+  for (let k = 0; k < 220; k++) stars.push(E('circle', { cx: -400 + rnd() * 1880, cy: 100 + rnd() * 1700, r: .6 + rnd() * 2.2, fill: rnd() < .15 ? C.or2 : C.ink, opacity: .2 + rnd() * .6 }, v7));
+  [[300, 640, 260, 'rgba(111,152,200,.10)'], [820, 1180, 300, 'rgba(146,48,63,.12)'], [640, 760, 200, 'rgba(201,98,31,.08)']].forEach(([x, y, r, c]) => E('ellipse', { cx: x, cy: y, rx: r, ry: r * .45, fill: c, transform: `rotate(-24 ${x} ${y})` }, v7));
+  E('circle', { cx: UX, cy: UY, r: UR - 26, fill: 'rgba(31,54,86,.35)', stroke: C.bp, 'stroke-width': 2, 'stroke-opacity': .5 }, v7);
+  const uring = E('circle', { cx: UX, cy: UY, r: UR - 26, fill: 'none', stroke: C.or2, 'stroke-width': 6, transform: `rotate(-90 ${UX} ${UY})` }, v7);
+  const d37 = PI.slice(0, 39);                                                      // 3 + 37 decimals + 1 = 38 digits shown
+  const ring7 = ringText(v7, UX, UY, UR, [[d37.slice(0, 2), `fill:${C.ink}`], [d37.slice(2), `fill:${C.or2}`], [' · ', `fill:${C.dim}`]], 34);
+  const inner7 = ringText(v7, UX, UY, UR - 66, [['VISIBLE UNIVERSE · VISIBLE UNIVERSE · VISIBLE UNIVERSE · ', `fill:${C.bp}`]], 24);
+  life.push((t) => { ring7.spin(-t * 4); inner7.spin(t * 6); stars.forEach((s, i) => { if (i % 7 === 0) s.style.opacity = Math.sin(t * 2 + i) > .5 ? .9 : .25; }); });
+  const n37 = H(`<div class="abs" style="left:0;width:1080px;top:${UY - 150}px;text-align:center">
+      <div class="bs" style="font-size:250px">37</div><div class="mono" style="font-size:30px;margin-top:10px;color:var(--or2)">DECIMALS</div></div>`, S7.w);
+  // atom callout
+  const atomP = [UX + UR * Math.cos(-.45), UY + UR * Math.sin(-.45)];
+  const call = E('g', {}, E('svg', { width: 1080, height: 1920 }, S7.w));
+  E('circle', { cx: atomP[0], cy: atomP[1], r: 8, fill: C.ink }, call);
+  E('polyline', { points: `${atomP[0]},${atomP[1]} ${atomP[0] + 60},${atomP[1] - 120} 860,560`, fill: 'none', stroke: C.ink, 'stroke-width': 3 }, call);
+  const atom = H(`<div class="slab" style="left:620px;top:396px;width:364px;background:var(--ink);color:#151A26;box-shadow:12px 12px 0 var(--or);white-space:normal">
+      <svg width="120" height="120" style="position:relative;display:block" viewBox="-60 -60 120 120">
+        <ellipse rx="54" ry="18" fill="none" stroke="#151A26" stroke-width="5"/><ellipse rx="54" ry="18" fill="none" stroke="#151A26" stroke-width="5" transform="rotate(60)"/>
+        <ellipse rx="54" ry="18" fill="none" stroke="#151A26" stroke-width="5" transform="rotate(-60)"/><circle r="10" fill="#C9621F"/></svg>
+      <div class="bs" style="font-size:84px;margin-top:10px">1 ATOM</div><div class="mono" style="font-size:24px;margin-top:8px">ACCURACY</div></div>`, S7.w);
+  const msr = H(`<div class="abs mono" style="left:96px;top:404px;font-size:30px;line-height:1.5">MEASURE<br>AROUND THE<br><span style="color:var(--bp)">VISIBLE UNIVERSE</span></div>`, S7.w);
+  hide(n37, call, atom, msr, ring7.g, inner7.g);
+  const t7 = T('uni') - .25;
+  cam(t7, wt('uni', /universe/) + .4 - t7, { scale: 2.6, rotationX: 16 }, { scale: 1, rotationX: 0 }, 'power2.inOut', .25, `${UX}px ${UY}px`);
+  cam(wt('uni', /universe/) + .4, L.uni.end - wt('uni', /universe/), { scale: 1, rotationX: 0 }, { scale: 1.04, rotationX: 6 }, 'sine.inOut', .25, `${UX}px ${UY}px`);
+  sfx(t7 + .1, 'swell', .7, 2.2);
+  pop(n37, T('uni'), { scale: 1.5 }); sfx(T('uni') + .05, 'impact', .6);
+  tl.set([ring7.g], { autoAlpha: 1 }, wt('uni', /37/));
+  draw(uring, wt('uni', /37/), .9);
+  tl.fromTo(ring7.spans, { fillOpacity: 0 }, { fillOpacity: 1, duration: .15, stagger: .25, immediateRender: false }, wt('uni', /decimals/));
+  slide(msr, wt('uni', /measure/) - .2, -60);
+  tl.to(inner7.g, { autoAlpha: 1, duration: .5 }, wt('uni', /visible/));
+  tl.to(call, { autoAlpha: 1, duration: .3 }, wt('uni', /accurate/));
+  pop(atom, wt('uni', /atom/) - .25, { scale: 1.5, rotation: 8 }); sfx(wt('uni', /atom/) - .2, 'pop', 1);
+
+  /* ======================= S8 THE POINT — pure curiosity; pi never ends, we just stop counting */
+  const S8 = scene(); cut(T('cur') - .25, S7, S8);
+  const tick8 = [0, 1, 2, 3, 4].map((k) => H(`<div class="abs mono" style="left:0;top:${470 + k * 170}px;white-space:nowrap;font-size:${[30, 44, 30, 56, 30][k]}px;font-weight:400;letter-spacing:.3em;color:rgba(240,230,214,${[.18, .3, .14, .22, .12][k]})">${PI.slice(40 + k * 120, 40 + k * 120 + 160)}</div>`, S8.g));
+  life.push((t) => tick8.forEach((e, k) => { e.style.transform = `translateX(${-((t - 40) * [140, 220, 110, 300, 90][k]) % 2400}px)`; }));
+  const after = H(`<div class="abs mono" style="left:96px;top:404px;font-size:30px;color:var(--dim)">DECIMAL 38 → ∞</div>`, S8.w);
+  const pure = H(`<div class="abs" style="left:96px;top:560px">
+      <div class="bs" style="font-size:250px">PURE</div>
+      <div class="slab bs" style="position:relative;display:inline-block;margin-top:24px;background:var(--mar);box-shadow:16px 16px 0 var(--or);font-size:190px;transform:rotate(-3deg)">CURIOSITY</div></div>`, S8.w);
+  hide(after, ...pure.children);
+  const t8 = T('cur') - .25;
+  cam(t8, .7, { x: -240, rotationY: 24, scale: 1.05 }, { x: 0, rotationY: 0, scale: 1 }, 'power3.out', .35);
+  slide(after, T('cur'), -40);
+  tl.fromTo(pure.children[0], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'power3.out', immediateRender: false }, wt('cur', /pure/) - .2);
+  pop(pure.children[1], wt('cur', /curiosity/) - .1, { scale: 1.6, rotation: -14 }); sfx(wt('cur', /curiosity/) - .05, 'impact', .8);
+  // final card
+  const fin = layer(world), finw = layer(words); hide(fin, finw);
+  const v8 = E('svg', { width: 1080, height: 1920 }, fin);
+  E('circle', { cx: 540, cy: 820, r: 300, fill: 'rgba(31,54,86,.4)', stroke: C.bp, 'stroke-width': 2, 'stroke-opacity': .4 }, v8);
+  const ring8 = ringText(v8, 540, 820, 330, [['PI NEVER ENDS', `fill:${C.ink}`], [' ● ', `fill:${C.or2}`], ['WE JUST STOP COUNTING', `fill:${C.ink}`], [' ● ', `fill:${C.or2}`]], 40);
+  const pi8 = E('text', { x: 548, y: 820, 'text-anchor': 'middle', 'dominant-baseline': 'central', style: `font:italic 470px "Instrument Serif";fill:${C.or2}` }, v8); pi8.textContent = 'π';
+  life.push((t) => ring8.spin(-t * 10));
+  const last = H(`<div class="abs" style="left:96px;top:1190px;width:888px;height:110px;display:flex;align-items:center;gap:0">
+      <div class="bs" id="lastd" style="font-size:96px;white-space:nowrap;overflow:hidden;width:690px"></div>
+      <div class="bs" style="font-size:66px;background:var(--mar);box-shadow:10px 10px 0 var(--or);padding:10px 22px 14px;margin-left:16px" id="stopb">STOP</div></div>`, finw);
+  const src8 = H(`<div class="abs mono" style="left:96px;top:398px;font-size:24px;font-weight:400;color:var(--dim);letter-spacing:.1em">SOURCES · NASA JPL · GUINNESS 2026</div>`, finw);
+  const lastd = last.querySelector('#lastd'), stopb = last.querySelector('#stopb');
+  gsap.set(stopb, { autoAlpha: 0 });
+  const t9 = T('end') - .25;
+  tl.set([S8.g, S8.w], { autoAlpha: 0 }, t9); tl.set([fin, finw], { autoAlpha: 1 }, t9);
+  tl.to([camEl, tcamEl], { filter: 'blur(16px)', duration: .14, ease: 'power2.in' }, t9 - .14); tl.to([camEl, tcamEl], { filter: 'blur(0px)', duration: .26, ease: 'power2.out' }, t9); sfx(t9 - .2, 'whoosh', .8);
+  cam(t9, END - t9, { rotationX: 22, scale: .92 }, { rotationX: 0, scale: 1.03 }, 'power2.out', .3, '540px 820px');
+  sfx(t9 + .1, 'shimmer', .7, 2.5);
+  const sA = wt('end', /stop/) - .1;
+  pop(stopb, sA, { scale: 1.8, rotation: 10 }); sfx(sA + .05, 'impact', 1);
+  tl.to(src8, { autoAlpha: 1, duration: .5 }, L.end.end);
+  hide(src8);
+  life.push((t) => { const n = t < t9 ? 0 : Math.min(19, Math.floor(2 + (Math.min(t, sA) - t9) * 6)); lastd.textContent = PI.slice(0, n) + (t < sA ? '_' : '…'); });
+  tl.to({}, { duration: Math.max(0, END - tl.duration()) });
+
+  /* ---------- HUD (outside the camera): chapter + progress, captions, grain */
+  H('<div class="abs" style="left:0;top:0;width:1080px;height:390px;background:linear-gradient(180deg,rgba(23,32,54,.92) 0%,rgba(23,32,54,.85) 82%,rgba(23,32,54,0) 100%)"></div>', st);
+  const chap = H('<div class="abs chap"></div>', st), chapn = H('<div class="abs chapn"></div>', st);
+  const CH = [['THE NUMBER', 0, T('what') - .25], ['THE CIRCLE', T('what') - .25, T('inf') - .25], ['FOREVER', T('inf') - .25, T('arch') - .25],
+              ['THE CHASE', T('arch') - .25, T('jpl') - .25], ["NASA'S 15", T('jpl') - .25, T('cur') - .25], ['THE POINT', T('cur') - .25, END]];
+  const sw = (888 - 5 * 10) / 6, segs = CH.map((c, i) => H(`<div class="seg" style="left:${96 + i * (sw + 10)}px;width:${sw}px"><b></b></div>`, st).firstElementChild);
+  const cap = H('<div class="abs" id="cap"><span></span></div>', st), capS = cap.firstElementChild;
+  const chunks = SC.lines.flatMap((l) => l.chunks.map((c) => ({ ...c, lid: l.id })));
+  const grain = H('<div id="grain"></div>', st); H('<div id="vig"></div>', st);
+  const cv = document.createElement('canvas'); cv.width = cv.height = 220; const cx2 = cv.getContext('2d'), im = cx2.createImageData(220, 220);
+  for (let k = 0; k < im.data.length; k += 4) { im.data[k] = im.data[k + 1] = im.data[k + 2] = 255; im.data[k + 3] = rnd() * 255 | 0; }
+  cx2.putImageData(im, 0, 0); grain.style.backgroundImage = `url(${cv.toDataURL()})`;
+  const e3 = gsap.parseEase('power3.out');
+  function frame(t) {
+    let c = null; for (const ch of chunks) if (t >= ch.s) c = ch;
+    const k = e3(clamp(0, 1, (c ? t - c.s : 0) / .2));
+    const show = c && t < L.end.end + .3;
+    capS.textContent = show ? c.t : ''; capS.style.visibility = show ? 'visible' : 'hidden';
+    cap.style.opacity = k; cap.style.transform = `translateY(${(1 - k) * 16}px)`;
+    let ci = 0; CH.forEach((cc, i) => { if (t >= cc[1]) ci = i; });
+    chap.textContent = 'π — ' + CH[ci][0]; chapn.textContent = `0${ci + 1} / 06`;
+    CH.forEach((cc, i) => { segs[i].style.width = (100 * clamp(0, 1, (t - cc[1]) / (cc[2] - cc[1]))) + '%'; });
+    life.forEach((f) => f(t));
+    const fr = Math.floor(t * 30); grain.style.transform = `translate(${(fr * 37) % 40}px, ${(fr * 53) % 40}px)`;
+  }
+  window.TL = tl;
+  window.seek = (t) => { tl.seek(t, false); frame(t); };
+  window.seek(0);
+  window.READY = true;
+})();
+</script>
+</body></html>

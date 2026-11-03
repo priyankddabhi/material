@@ -49,6 +49,7 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 ## Animation and video
 | Keywords | Path |
 |---|---|
+| ★ long 16:9 explainer video kit (engine, voice, render, SFX, master prompt for a new chat) | [`metaweek/`](metaweek/README.md) → start with [`metaweek/MASTER-PROMPT.md`](metaweek/MASTER-PROMPT.md) |
 | ★ video workflow, AI video prompt template, camera angles, parallax, whip cut, text on a circle, sound effects, mix | [`guides/animation/video-playbook.md`](guides/animation/video-playbook.md) |
 | sound effects generator (whoosh, impact, tick…) | [`guides/animation/tools/sfx_synth.py`](guides/animation/tools/sfx_synth.py) |
 | ★ code recipes: punch word, progress ring, 3D flip, stagger, motion blur, orbit, wipe, push-in, voice sync, counter | [`guides/animation/motion-recipes.md`](guides/animation/motion-recipes.md) |

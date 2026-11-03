@@ -1,0 +1,984 @@
+{
+ "lines": [
+  {
+   "id": "hook",
+   "start": 0.35,
+   "end": 3.79,
+   "text": "We've calculated pi to 314 trillion digits.",
+   "words": [
+    {
+     "w": "We've",
+     "s": 0.35,
+     "e": 0.678
+    },
+    {
+     "w": "calculated",
+     "s": 0.678,
+     "e": 1.278
+    },
+    {
+     "w": "pi",
+     "s": 1.278,
+     "e": 1.442
+    },
+    {
+     "w": "to",
+     "s": 1.442,
+     "e": 1.606
+    },
+    {
+     "w": "314",
+     "s": 1.606,
+     "e": 2.862
+    },
+    {
+     "w": "trillion",
+     "s": 2.862,
+     "e": 3.353
+    },
+    {
+     "w": "digits.",
+     "s": 3.353,
+     "e": 3.79
+    }
+   ],
+   "chunks": [
+    {
+     "t": "We've calculated pi to",
+     "s": 0.35
+    },
+    {
+     "t": "314 trillion digits.",
+     "s": 1.606
+    }
+   ]
+  },
+  {
+   "id": "nasa0",
+   "start": 4.31,
+   "end": 5.72,
+   "text": "NASA uses fifteen.",
+   "words": [
+    {
+     "w": "NASA",
+     "s": 4.31,
+     "e": 4.681
+    },
+    {
+     "w": "uses",
+     "s": 4.681,
+     "e": 5.052
+    },
+    {
+     "w": "fifteen.",
+     "s": 5.052,
+     "e": 5.72
+    }
+   ],
+   "chunks": [
+    {
+     "t": "NASA uses fifteen.",
+     "s": 4.31
+    }
+   ]
+  },
+  {
+   "id": "what",
+   "start": 6.226,
+   "end": 7.286,
+   "text": "So what is pi?",
+   "words": [
+    {
+     "w": "So",
+     "s": 6.226,
+     "e": 6.438
+    },
+    {
+     "w": "what",
+     "s": 6.438,
+     "e": 6.791
+    },
+    {
+     "w": "is",
+     "s": 6.791,
+     "e": 7.003
+    },
+    {
+     "w": "pi?",
+     "s": 7.003,
+     "e": 7.286
+    }
+   ],
+   "chunks": [
+    {
+     "t": "So what is pi?",
+     "s": 6.226
+    }
+   ]
+  },
+  {
+   "id": "circ",
+   "start": 7.626,
+   "end": 11.626,
+   "text": "Take any circle. Divide the distance around it by the distance across.",
+   "words": [
+    {
+     "w": "Take",
+     "s": 7.626,
+     "e": 7.876
+    },
+    {
+     "w": "any",
+     "s": 7.876,
+     "e": 8.076
+    },
+    {
+     "w": "circle.",
+     "s": 8.076,
+     "e": 8.476
+    },
+    {
+     "w": "Divide",
+     "s": 8.916,
+     "e": 9.267
+    },
+    {
+     "w": "the",
+     "s": 9.267,
+     "e": 9.468
+    },
+    {
+     "w": "distance",
+     "s": 9.468,
+     "e": 9.92
+    },
+    {
+     "w": "around",
+     "s": 9.92,
+     "e": 10.271
+    },
+    {
+     "w": "it",
+     "s": 10.271,
+     "e": 10.422
+    },
+    {
+     "w": "by",
+     "s": 10.422,
+     "e": 10.572
+    },
+    {
+     "w": "the",
+     "s": 10.572,
+     "e": 10.773
+    },
+    {
+     "w": "distance",
+     "s": 10.773,
+     "e": 11.225
+    },
+    {
+     "w": "across.",
+     "s": 11.225,
+     "e": 11.626
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Take any circle.",
+     "s": 7.626
+    },
+    {
+     "t": "Divide the distance around",
+     "s": 8.916
+    },
+    {
+     "t": "it by the distance",
+     "s": 10.271
+    },
+    {
+     "t": "across.",
+     "s": 11.225
+    }
+   ]
+  },
+  {
+   "id": "same",
+   "start": 12.176,
+   "end": 16.236,
+   "text": "You always get the same number. Three point one four one five nine...",
+   "words": [
+    {
+     "w": "You",
+     "s": 12.176,
+     "e": 12.364
+    },
+    {
+     "w": "always",
+     "s": 12.364,
+     "e": 12.692
+    },
+    {
+     "w": "get",
+     "s": 12.692,
+     "e": 12.879
+    },
+    {
+     "w": "the",
+     "s": 12.879,
+     "e": 13.067
+    },
+    {
+     "w": "same",
+     "s": 13.067,
+     "e": 13.301
+    },
+    {
+     "w": "number.",
+     "s": 13.301,
+     "e": 13.676
+    },
+    {
+     "w": "Three",
+     "s": 14.146,
+     "e": 14.476
+    },
+    {
+     "w": "point",
+     "s": 14.476,
+     "e": 14.806
+    },
+    {
+     "w": "one",
+     "s": 14.806,
+     "e": 15.026
+    },
+    {
+     "w": "four",
+     "s": 15.026,
+     "e": 15.301
+    },
+    {
+     "w": "one",
+     "s": 15.301,
+     "e": 15.521
+    },
+    {
+     "w": "five",
+     "s": 15.521,
+     "e": 15.796
+    },
+    {
+     "w": "nine...",
+     "s": 15.796,
+     "e": 16.236
+    }
+   ],
+   "chunks": [
+    {
+     "t": "You always get the",
+     "s": 12.176
+    },
+    {
+     "t": "same number.",
+     "s": 13.067
+    },
+    {
+     "t": "Three point one four",
+     "s": 14.146
+    },
+    {
+     "t": "one five nine...",
+     "s": 15.301
+    }
+   ]
+  },
+  {
+   "id": "stop",
+   "start": 16.576,
+   "end": 17.726,
+   "text": "And it never stops.",
+   "words": [
+    {
+     "w": "And",
+     "s": 16.576,
+     "e": 16.806
+    },
+    {
+     "w": "it",
+     "s": 16.806,
+     "e": 16.979
+    },
+    {
+     "w": "never",
+     "s": 16.979,
+     "e": 17.323
+    },
+    {
+     "w": "stops.",
+     "s": 17.323,
+     "e": 17.726
+    }
+   ],
+   "chunks": [
+    {
+     "t": "And it never stops.",
+     "s": 16.576
+    }
+   ]
+  },
+  {
+   "id": "inf",
+   "start": 18.232,
+   "end": 20.702,
+   "text": "Not almost infinite. Truly infinite.",
+   "words": [
+    {
+     "w": "Not",
+     "s": 18.232,
+     "e": 18.463
+    },
+    {
+     "w": "almost",
+     "s": 18.463,
+     "e": 18.866
+    },
+    {
+     "w": "infinite.",
+     "s": 18.866,
+     "e": 19.442
+    },
+    {
+     "w": "Truly",
+     "s": 19.702,
+     "e": 20.077
+    },
+    {
+     "w": "infinite.",
+     "s": 20.077,
+     "e": 20.702
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Not almost infinite.",
+     "s": 18.232
+    },
+    {
+     "t": "Truly infinite.",
+     "s": 19.702
+    }
+   ]
+  },
+  {
+   "id": "proof",
+   "start": 21.212,
+   "end": 25.952,
+   "text": "The digits never end and never repeat. That was proven in 1761.",
+   "words": [
+    {
+     "w": "The",
+     "s": 21.212,
+     "e": 21.435
+    },
+    {
+     "w": "digits",
+     "s": 21.435,
+     "e": 21.824
+    },
+    {
+     "w": "never",
+     "s": 21.824,
+     "e": 22.158
+    },
+    {
+     "w": "end",
+     "s": 22.158,
+     "e": 22.381
+    },
+    {
+     "w": "and",
+     "s": 22.381,
+     "e": 22.603
+    },
+    {
+     "w": "never",
+     "s": 22.603,
+     "e": 22.937
+    },
+    {
+     "w": "repeat.",
+     "s": 22.937,
+     "e": 23.382
+    },
+    {
+     "w": "That",
+     "s": 23.852,
+     "e": 24.036
+    },
+    {
+     "w": "was",
+     "s": 24.036,
+     "e": 24.184
+    },
+    {
+     "w": "proven",
+     "s": 24.184,
+     "e": 24.442
+    },
+    {
+     "w": "in",
+     "s": 24.442,
+     "e": 24.552
+    },
+    {
+     "w": "1761.",
+     "s": 24.552,
+     "e": 25.952
+    }
+   ],
+   "chunks": [
+    {
+     "t": "The digits never end",
+     "s": 21.212
+    },
+    {
+     "t": "and never repeat.",
+     "s": 22.381
+    },
+    {
+     "t": "That was proven in",
+     "s": 23.852
+    },
+    {
+     "t": "1761.",
+     "s": 24.552
+    }
+   ]
+  },
+  {
+   "id": "arch",
+   "start": 26.458,
+   "end": 31.778,
+   "text": "Over two thousand years ago, Archimedes trapped it between two 96-sided shapes.",
+   "words": [
+    {
+     "w": "Over",
+     "s": 26.458,
+     "e": 26.738
+    },
+    {
+     "w": "two",
+     "s": 26.738,
+     "e": 26.963
+    },
+    {
+     "w": "thousand",
+     "s": 26.963,
+     "e": 27.468
+    },
+    {
+     "w": "years",
+     "s": 27.468,
+     "e": 27.805
+    },
+    {
+     "w": "ago,",
+     "s": 27.805,
+     "e": 28.466
+    },
+    {
+     "w": "Archimedes",
+     "s": 28.466,
+     "e": 29.083
+    },
+    {
+     "w": "trapped",
+     "s": 29.083,
+     "e": 29.532
+    },
+    {
+     "w": "it",
+     "s": 29.532,
+     "e": 29.701
+    },
+    {
+     "w": "between",
+     "s": 29.701,
+     "e": 30.15
+    },
+    {
+     "w": "two",
+     "s": 30.15,
+     "e": 30.374
+    },
+    {
+     "w": "96-sided",
+     "s": 30.374,
+     "e": 31.329
+    },
+    {
+     "w": "shapes.",
+     "s": 31.329,
+     "e": 31.778
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Over two thousand years",
+     "s": 26.458
+    },
+    {
+     "t": "ago,",
+     "s": 27.805
+    },
+    {
+     "t": "Archimedes trapped it between",
+     "s": 28.466
+    },
+    {
+     "t": "two 96-sided shapes.",
+     "s": 30.15
+    }
+   ]
+  },
+  {
+   "id": "rec",
+   "start": 32.282,
+   "end": 37.952,
+   "text": "Today, one server ran for 110 days to reach 314 trillion digits.",
+   "words": [
+    {
+     "w": "Today,",
+     "s": 32.282,
+     "e": 32.722
+    },
+    {
+     "w": "one",
+     "s": 32.932,
+     "e": 33.141
+    },
+    {
+     "w": "server",
+     "s": 33.141,
+     "e": 33.508
+    },
+    {
+     "w": "ran",
+     "s": 33.508,
+     "e": 33.717
+    },
+    {
+     "w": "for",
+     "s": 33.717,
+     "e": 33.927
+    },
+    {
+     "w": "110",
+     "s": 33.927,
+     "e": 34.764
+    },
+    {
+     "w": "days",
+     "s": 34.764,
+     "e": 35.026
+    },
+    {
+     "w": "to",
+     "s": 35.026,
+     "e": 35.183
+    },
+    {
+     "w": "reach",
+     "s": 35.183,
+     "e": 35.857
+    },
+    {
+     "w": "314",
+     "s": 35.857,
+     "e": 37.062
+    },
+    {
+     "w": "trillion",
+     "s": 37.062,
+     "e": 37.533
+    },
+    {
+     "w": "digits.",
+     "s": 37.533,
+     "e": 37.952
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Today,",
+     "s": 32.282
+    },
+    {
+     "t": "one server ran for",
+     "s": 32.932
+    },
+    {
+     "t": "110 days to reach",
+     "s": 33.927
+    },
+    {
+     "t": "314 trillion digits.",
+     "s": 35.857
+    }
+   ]
+  },
+  {
+   "id": "jpl",
+   "start": 38.454,
+   "end": 41.494,
+   "text": "But NASA steers spacecraft with just fifteen decimals.",
+   "words": [
+    {
+     "w": "But",
+     "s": 38.454,
+     "e": 38.675
+    },
+    {
+     "w": "NASA",
+     "s": 38.675,
+     "e": 38.951
+    },
+    {
+     "w": "steers",
+     "s": 38.951,
+     "e": 39.338
+    },
+    {
+     "w": "spacecraft",
+     "s": 39.338,
+     "e": 39.946
+    },
+    {
+     "w": "with",
+     "s": 39.946,
+     "e": 40.222
+    },
+    {
+     "w": "just",
+     "s": 40.222,
+     "e": 40.499
+    },
+    {
+     "w": "fifteen",
+     "s": 40.499,
+     "e": 40.941
+    },
+    {
+     "w": "decimals.",
+     "s": 40.941,
+     "e": 41.494
+    }
+   ],
+   "chunks": [
+    {
+     "t": "But NASA steers spacecraft",
+     "s": 38.454
+    },
+    {
+     "t": "with just fifteen decimals.",
+     "s": 39.946
+    }
+   ]
+  },
+  {
+   "id": "inch",
+   "start": 42.084,
+   "end": 46.234,
+   "text": "On a circle 40 billion miles across, that's off by about half an inch.",
+   "words": [
+    {
+     "w": "On",
+     "s": 42.084,
+     "e": 42.252
+    },
+    {
+     "w": "a",
+     "s": 42.252,
+     "e": 42.364
+    },
+    {
+     "w": "circle",
+     "s": 42.364,
+     "e": 42.756
+    },
+    {
+     "w": "40",
+     "s": 42.756,
+     "e": 43.092
+    },
+    {
+     "w": "billion",
+     "s": 43.092,
+     "e": 43.54
+    },
+    {
+     "w": "miles",
+     "s": 43.54,
+     "e": 43.876
+    },
+    {
+     "w": "across,",
+     "s": 43.876,
+     "e": 44.324
+    },
+    {
+     "w": "that's",
+     "s": 44.654,
+     "e": 44.954
+    },
+    {
+     "w": "off",
+     "s": 44.954,
+     "e": 45.246
+    },
+    {
+     "w": "by",
+     "s": 45.246,
+     "e": 45.375
+    },
+    {
+     "w": "about",
+     "s": 45.375,
+     "e": 45.632
+    },
+    {
+     "w": "half",
+     "s": 45.632,
+     "e": 45.847
+    },
+    {
+     "w": "an",
+     "s": 45.847,
+     "e": 45.976
+    },
+    {
+     "w": "inch.",
+     "s": 45.976,
+     "e": 46.234
+    }
+   ],
+   "chunks": [
+    {
+     "t": "On a circle 40",
+     "s": 42.084
+    },
+    {
+     "t": "billion miles across,",
+     "s": 43.092
+    },
+    {
+     "t": "that's off by about",
+     "s": 44.654
+    },
+    {
+     "t": "half an inch.",
+     "s": 45.632
+    }
+   ]
+  },
+  {
+   "id": "uni",
+   "start": 46.738,
+   "end": 52.238,
+   "text": "With 37 decimals, you could measure around the visible universe, accurate to one atom.",
+   "words": [
+    {
+     "w": "With",
+     "s": 46.738,
+     "e": 47.141
+    },
+    {
+     "w": "37",
+     "s": 47.141,
+     "e": 47.722
+    },
+    {
+     "w": "decimals,",
+     "s": 47.722,
+     "e": 48.168
+    },
+    {
+     "w": "you",
+     "s": 48.468,
+     "e": 48.663
+    },
+    {
+     "w": "could",
+     "s": 48.663,
+     "e": 48.955
+    },
+    {
+     "w": "measure",
+     "s": 48.955,
+     "e": 49.344
+    },
+    {
+     "w": "around",
+     "s": 49.344,
+     "e": 49.685
+    },
+    {
+     "w": "the",
+     "s": 49.685,
+     "e": 49.88
+    },
+    {
+     "w": "visible",
+     "s": 49.88,
+     "e": 50.27
+    },
+    {
+     "w": "universe,",
+     "s": 50.27,
+     "e": 51.167
+    },
+    {
+     "w": "accurate",
+     "s": 51.167,
+     "e": 51.605
+    },
+    {
+     "w": "to",
+     "s": 51.605,
+     "e": 51.751
+    },
+    {
+     "w": "one",
+     "s": 51.751,
+     "e": 51.946
+    },
+    {
+     "w": "atom.",
+     "s": 51.946,
+     "e": 52.238
+    }
+   ],
+   "chunks": [
+    {
+     "t": "With 37 decimals,",
+     "s": 46.738
+    },
+    {
+     "t": "you could measure around",
+     "s": 48.468
+    },
+    {
+     "t": "the visible universe,",
+     "s": 49.685
+    },
+    {
+     "t": "accurate to one atom.",
+     "s": 51.167
+    }
+   ]
+  },
+  {
+   "id": "cur",
+   "start": 52.742,
+   "end": 55.012,
+   "text": "Everything after that is pure curiosity.",
+   "words": [
+    {
+     "w": "Everything",
+     "s": 52.742,
+     "e": 53.351
+    },
+    {
+     "w": "after",
+     "s": 53.351,
+     "e": 53.683
+    },
+    {
+     "w": "that",
+     "s": 53.683,
+     "e": 53.96
+    },
+    {
+     "w": "is",
+     "s": 53.96,
+     "e": 54.126
+    },
+    {
+     "w": "pure",
+     "s": 54.126,
+     "e": 54.403
+    },
+    {
+     "w": "curiosity.",
+     "s": 54.403,
+     "e": 55.012
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Everything after that is",
+     "s": 52.742
+    },
+    {
+     "t": "pure curiosity.",
+     "s": 54.126
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "start": 55.492,
+   "end": 57.872,
+   "text": "Pi never ends. We just stop counting.",
+   "words": [
+    {
+     "w": "Pi",
+     "s": 55.492,
+     "e": 55.682
+    },
+    {
+     "w": "never",
+     "s": 55.682,
+     "e": 56.062
+    },
+    {
+     "w": "ends.",
+     "s": 56.062,
+     "e": 56.442
+    },
+    {
+     "w": "We",
+     "s": 56.702,
+     "e": 56.855
+    },
+    {
+     "w": "just",
+     "s": 56.855,
+     "e": 57.109
+    },
+    {
+     "w": "stop",
+     "s": 57.109,
+     "e": 57.363
+    },
+    {
+     "w": "counting.",
+     "s": 57.363,
+     "e": 57.872
+    }
+   ],
+   "chunks": [
+    {
+     "t": "Pi never ends.",
+     "s": 55.492
+    },
+    {
+     "t": "We just stop counting.",
+     "s": 56.702
+    }
+   ]
+  }
+ ],
+ "end": 60.67
+}

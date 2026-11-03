@@ -1,0 +1,13 @@
+{
+  "voice": "af_heart",
+  "speed": 0.95,
+  "chapters": [
+    { "id": "demo", "title": "THE ENGINE", "hold": 1.6,
+      "passages": [
+        [ { "id": "hook", "text": "Every frame of this video is code." } ],
+        [ { "id": "code", "text": "One timeline, one seek function, thirty frames a second." } ],
+        [ { "id": "chain", "text": "Packages stack up, and one bad block can poison the whole chain." } ],
+        [ { "id": "end", "text": "Same style. Any topic." } ]
+      ] }
+  ]
+}
