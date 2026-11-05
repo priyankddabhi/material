@@ -115,3 +115,12 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 | Keywords | Path |
 |---|---|
 | where a file came from, licence, version | [`SOURCES.md`](SOURCES.md) |
+
+## Kinetic-type reels and website intro videos
+| Keywords | Path |
+|---|---|
+| kinetic typography, showreel, portfolio / work reel, motion design, beat-locked cuts, 120 BPM | [`skills/kinetic-reel/SKILL.md`](skills/kinetic-reel/SKILL.md) |
+| look, motion vocabulary, transition catalogue (zoom-through, iris, wipe, slats, pixel grid, push), layout | [`skills/kinetic-reel/references/style-guide.md`](skills/kinetic-reel/references/style-guide.md) |
+| synthesized score, no noise whooshes, in-key swells, silence on half the cuts | [`skills/kinetic-reel/references/sound.md`](skills/kinetic-reel/references/sound.md) |
+| reel as a website entry page: autoplay, skip, sound toggle, end screen, iris exit | [`skills/kinetic-reel/examples/site-intro/`](skills/kinetic-reel/examples/site-intro/) |
+| full 84 s example: storyboard, reel.js, score | [`skills/kinetic-reel/examples/work-reel-26/`](skills/kinetic-reel/examples/work-reel-26/) |

@@ -21,6 +21,7 @@ material/
 │  ├─ impeccable/      design vocabulary: polish, critique, layout, typeset, colorize…
 │  ├─ taste-skill/     art direction for websites
 │  ├─ taste-skill-classic/  12 extra skills: brandkit, minimalist, soft (premium), redesign, brutalist, mockups…
+│  ├─ kinetic-reel/    kinetic-type motion reels + website intro (opus-video-skills)
 │  ├─ anthropic/       frontend-design · canvas-design (+29 fonts) · theme-factory (10 themes) · algorithmic-art
 │  └─ brand-styles/    84 brand design systems (DESIGN.md)
 ├─ assets/          ready files to use directly
@@ -41,6 +42,7 @@ material/
 | **Website / landing page** | [`guides/layout/`](guides/layout/) | [`skills/impeccable`](skills/impeccable/) + [`skills/taste-skill`](skills/taste-skill/) · style direction from [`skills/brand-styles`](skills/brand-styles/) | [`assets/fonts`](assets/fonts/README.md), [`assets/colors`](assets/colors/tailwind/theme.css), [`assets/icons`](assets/icons/), [`libraries/magicui`](libraries/magicui/) |
 | **Long horizontal explainer (5–6 min, voice + SFX)** | [`guides/metaweek/MASTER-PROMPT.md`](guides/metaweek/MASTER-PROMPT.md) (paste into a new chat) + [`guides/metaweek/README.md`](guides/metaweek/README.md) | — | `guides/metaweek/engine/` (kit.js, make_voice.py, render.mjs, mix.py) |
 | **Video / animated infographic** | [`guides/animation/`](guides/animation/README.md) (start with `video-playbook.md`, then `motion-recipes.md`) + [`guides/layout/margin-rules.md`](guides/layout/margin-rules.md) | — | GSAP (`npm install gsap`) or [`libraries/anime`](libraries/anime/), [`libraries/chartjs`](libraries/chartjs/), [`libraries/blueprint-engine`](libraries/blueprint-engine/), icons, fonts · more styles: [`catalog/repos.md`](catalog/repos.md) → lemo-opuscar |
+| **Kinetic-type reel, showreel, website intro video** | [`skills/kinetic-reel/SKILL.md`](skills/kinetic-reel/SKILL.md) (`references/style-guide.md`, `references/sound.md`) | [`skills/kinetic-reel`](skills/kinetic-reel/README.md) | its `template/` (three.js, canvas 2D, synth score) · site intro: [`skills/kinetic-reel/examples/site-intro/`](skills/kinetic-reel/examples/site-intro/) |
 | **Product photo / ad image** | [`guides/product-photo/`](guides/product-photo/README.md) | [`skills/anthropic/canvas-design`](skills/anthropic/canvas-design/) | fonts, [`theme-factory`](skills/anthropic/theme-factory/) palettes, brand styles |
 | **Static infographic / poster** | [`guides/layout/`](guides/layout/) | [`skills/anthropic/canvas-design`](skills/anthropic/canvas-design/) | icons, colours, [`libraries/roughjs`](libraries/roughjs/), [`libraries/chartjs`](libraries/chartjs/) |
 | **Pick colours / a theme** | [`guides/product-photo/topics/colour.md`](guides/product-photo/topics/colour.md) | [`skills/anthropic/theme-factory`](skills/anthropic/theme-factory/) (10 themes) | [`assets/colors/tailwind/theme.css`](assets/colors/tailwind/theme.css) · brand palettes in [`skills/brand-styles`](skills/brand-styles/) |
