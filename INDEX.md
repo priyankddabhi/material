@@ -124,3 +124,14 @@ Search this page for a word (Ctrl+F), then open the path. ★ = our own rule (re
 | synthesized score, no noise whooshes, in-key swells, silence on half the cuts | [`skills/kinetic-reel/references/sound.md`](skills/kinetic-reel/references/sound.md) |
 | reel as a website entry page: autoplay, skip, sound toggle, end screen, iris exit | [`skills/kinetic-reel/examples/site-intro/`](skills/kinetic-reel/examples/site-intro/) |
 | full 84 s example: storyboard, reel.js, score | [`skills/kinetic-reel/examples/work-reel-26/`](skills/kinetic-reel/examples/work-reel-26/) |
+
+## Website build, UI audit, scroll and 3D (skills)
+| Keywords | Path |
+|---|---|
+| UI audit, accessibility, a11y, focus states, forms, dark mode, review my UI | [`skills/vercel/web-design-guidelines/`](skills/vercel/web-design-guidelines/SKILL.md) + rules [`skills/vercel/web-interface-guidelines/command.md`](skills/vercel/web-interface-guidelines/command.md) |
+| React, Next.js, performance, bundle size, re-renders, data fetching | [`skills/vercel/react-best-practices/`](skills/vercel/react-best-practices/SKILL.md) |
+| component structure, compound components, props design | [`skills/vercel/composition-patterns/`](skills/vercel/composition-patterns/SKILL.md) |
+| Tailwind v4, design tokens, design system, component library | [`skills/tailwind-design-system/`](skills/tailwind-design-system/SKILL.md) |
+| GSAP, timeline, easing, stagger, ScrollTrigger, scroll animation, pinning, parallax | [`skills/gsap-skills/`](skills/gsap-skills/README.md) |
+| three.js, 3D hero, WebGL, shaders, post-processing, mouse interaction, React Three Fiber | [`skills/threejs-skills/`](skills/threejs-skills/README.md) |
+| every repo we copied from, built on or took ideas from | [`CREDITS.md`](CREDITS.md) |

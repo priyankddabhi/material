@@ -1,6 +1,6 @@
 # Repo catalog — useful repos that are NOT copied here
 
-These 20 repos are useful but were not copied, because they are too big, React-only, licence-limited, or only needed now and then.
+These 22 repos are useful but were not copied, because they are too big, React-only, licence-limited, or only needed now and then.
 Each entry tells an AI agent what the repo is good for, which part is worth reading, and how to fetch only that part.
 
 **How an AI agent should use this file**
@@ -28,6 +28,8 @@ Facts checked on 2026-10-30 (stars, size, last update, licence, folder paths).
 | Bold, distinct style | neobrutalism-components |
 | Web UI animation in React | motion |
 | Layout ideas only (look, never copy) | origin-space/ui-experiments |
+| Full AI video studio with paid providers (read only, AGPL) | OpenMontage |
+| Diagrams as clean SVG / PNG | beautiful-mermaid |
 
 ---
 
@@ -192,6 +194,22 @@ Facts checked on 2026-10-30 (stars, size, last update, licence, folder paths).
 - **Useful parts:** `styles/<name>/STYLE.md` (the style rules) · `styles/<name>/demo/` (full film code) · `styles/_template/` (start your own style)
 - **Already copied here:** the Blueprint engine → [`../libraries/blueprint-engine/`](../libraries/blueprint-engine/)
 - **How to fetch:** sparse-checkout one style: `'/styles/<name>/' '/LICENSE'`. Font files are not in the repo; get them from google/fonts as named in each style's CREDITS.
+
+## 21. calesthio/OpenMontage — a full agentic video studio (+ web skills to read)
+- **Link:** https://github.com/calesthio/OpenMontage · site https://openmontage.video
+- **Licence:** **AGPL-3.0** (strong copyleft): read it for ideas, **do not copy its files** into this repo or into closed projects · **Stars:** 77k · **Updated:** 2026-11-03
+- **Use it for:** making videos with paid AI providers (Veo, Kling, Seedance, ElevenLabs, HeyGen…) through 12 ready pipelines (animated explainer, short-form clip factory, documentary montage, talking head, screen demo, podcast repurpose, localisation…); turning a reference video into a production plan; a live storyboard board ("Backlot") with approval gates.
+- **Keywords:** AI video pipeline, agentic video production, reference video analysis, storyboard approval, documentary, talking head, website to video
+- **Useful parts to read:** `skills/meta/reviewer.md` (video QC), `skills/meta/video-reference-analyst.md`, `skills/creative/short-form.md`, `storytelling.md`, `sound-design.md`, `typography.md`, `lib/slideshow_risk.py` (detects "slideshow" videos), `ink-theater/` (ink mascot engine + CMU motion-capture clips), `.agents/skills/visual-style/` (extract a design system from a URL), `.agents/skills/website-to-video/` (site → promo clip).
+- **Already taken from its originals (not from OpenMontage):** GSAP skills, three.js skills, Vercel web skills, Tailwind design system → [`../skills/`](../skills/README.md). Its bundled HyperFrames skills come from https://github.com/heygen-com/hyperframes (Apache-2.0).
+- **How to fetch:** sparse-checkout one folder (below) and keep it outside this repo because of the AGPL.
+
+## 22. lukilabs/beautiful-mermaid — good-looking diagrams
+- **Link:** https://github.com/lukilabs/beautiful-mermaid
+- **Licence:** MIT · **Stars:** 11k · **Updated:** 2026-05-06
+- **Use it for:** rendering Mermaid diagrams (flowcharts, sequence, charts) as clean SVG / PNG for websites, docs and video frames.
+- **Keywords:** Mermaid, diagram, flowchart, SVG diagram, architecture diagram, docs
+- **How to fetch:** `npm install beautiful-mermaid` (see its README); no need to copy the repo.
 
 ---
 
