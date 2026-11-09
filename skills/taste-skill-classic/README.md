@@ -18,3 +18,5 @@ Older skills from the taste-skill repo (version of 2026-09-26). The current repo
 | [`taste-skill-v1/`](taste-skill-v1/) | design-taste-frontend-v1 | The original v1 of taste-skill (variance / motion / density dials) | Projects that relied on v1 behaviour | taste, v1, dials |
 
 Licence: MIT ([`LICENSE`](LICENSE)). Source: https://github.com/Leonxlnx/taste-skill at commit `ce26fc2` (see [`../../SOURCES.md`](../../SOURCES.md)).
+
+`taste-skill-sept-2026/` is the 88 KB `taste-skill/SKILL.md` from the same commit (`ce26fc2`), kept for reference. The newer v2 is in `skills/taste-skill/`.

@@ -12,6 +12,17 @@ Each entry tells an AI agent what the repo is good for, which part is worth read
 
 Facts checked on 2026-10-30 (stars, size, last update, licence, folder paths).
 
+
+## More lists in this folder
+
+| File | What it is |
+|---|---|
+| [`ui-kits.md`](ui-kits.md) | 47+ UI kits with quick picks, skill level and age labels |
+| [`graphics-libraries.md`](graphics-libraries.md) | Lightweight web graphics libraries, grouped by style |
+| [`security-tools.md`](security-tools.md) | 18 open-source security audit tools. Run them only on sites you own or are allowed to test |
+
+Starter kit worth knowing: [create-t3-app](https://github.com/t3-oss/create-t3-app) (`npm create t3-app@latest`).
+
 ## Quick pick
 | Need | Best repo here |
 |---|---|
